@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `Class` (
+	`code` BIGINT NOT NULL AUTO_INCREMENT,
+	`courseCode` BIGINT,
+	`day` CHAR(3),
+	`startTime` TIMESTAMP,
+	`endTime` TIMESTAMP,
+	PRIMARY KEY (`code`),
+	FOREIGN KEY (courseCode) REFERENCES Course(code)
+) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

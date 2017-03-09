@@ -1,0 +1,99 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title Cardio: Free One Page Template by Luka Cvetinovic
+        meta(name='description', content='Cardio is a free one page template made exclusively for Codrops by Luka Cvetinovic')
+        meta(name='keywords', content='html template, css, free, one page, gym, fitness, web design')
+        meta(name='author', content='Luka Cvetinovic for Codrops')
+        // Favicons (created with http://realfavicongenerator.net/)
+        link(rel='apple-touch-icon', sizes='57x57', href='/public/img/favicons/apple-touch-icon-57x57.png')
+        link(rel='apple-touch-icon', sizes='60x60', href='/public/img/favicons/apple-touch-icon-60x60.png')
+        link(rel='icon', type='image/png', href='/public/img/favicons/favicon-32x32.png', sizes='32x32')
+        link(rel='icon', type='image/png', href='/public/img/favicons/favicon-16x16.png', sizes='16x16')
+        link(rel='manifest', href='/public/img/favicons/manifest.json')
+        link(rel='shortcut icon', href='/public/img/favicons/favicon.ico')
+        meta(name='msapplication-TileColor', content='#00a8ff')
+        meta(name='msapplication-config', content='/public/img/favicons/browserconfig.xml')
+        meta(name='theme-color', content='#ffffff')
+        // Normalize
+        link(rel='stylesheet', type='text/css', href='/public/css/normalize.css')
+        // Bootstrap
+        link(rel='stylesheet', type='text/css', href='/public/css/bootstrap.css')
+        // Owl
+        link(rel='stylesheet', type='text/css', href='/public/css/owl.css')
+        // Animate.css
+        link(rel='stylesheet', type='text/css', href='/public/css/animate.css')
+        // Font Awesome
+        link(rel='stylesheet', type='text/css', href='/public/fonts/font-awesome-4.1.0/css/font-awesome.min.css')
+        // Elegant Icons
+        link(rel='stylesheet', type='text/css', href='/public/fonts/eleganticons/et-icons.css')
+        // Main style
+        link(rel='stylesheet', type='text/css', href='/public/css/cardio.css')
+        block links
+    body
+        .preloader
+            img(src='/public/img/loader.gif', alt='Preloader image')
+        nav.navbar
+            .container
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#')
+                        img(src='/public/img/logo.png', data-active-url='/public/img/logo-active.png', alt='')
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right.main-nav
+                        li
+                            a(href='/') Home
+                        li
+                            a(href='/courses') Classes
+                        li
+                            a(href='#team') Blog
+                        li
+                            a(href='#pricing') FAQs
+                        li
+                            a.btn.btn-blue(href='#', data-toggle='modal', data-target='#modal1') Sign Up
+                // /.navbar-collapse
+            // /.container-fluid
+        block content
+        footer
+            .row.bottom-footer.text-center-mobile
+                .col-sm-8
+                    p
+                        | © 2015 All Rights Reserved.
+                        a(href='http://loanfactory.com') Thuan Nguyen
+                .col-sm-4.text-right.text-center-mobile
+                    ul.social-footer
+                        li
+                            a(href='http://www.facebook.com/ThuanBroker')
+                                i.fa.fa-facebook
+                        li
+                            a(href='http://www.twitter.com/codrops')
+                                i.fa.fa-twitter
+                        li
+                            a(href='https://plus.google.com/101095823814290637419')
+                                i.fa.fa-google-plus
+        // Holder for mobile navigation
+        .mobile-nav
+            ul
+            a.close-link(href='#')
+                i.arrow_up
+        // Scripts
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+        script(src='/public/js/owl.carousel.min.js')
+        script(src='/public/js/bootstrap.min.js')
+        script(src='/public/js/wow.min.js')
+        script(src='/public/js/typewriter.js')
+        script(src='/public/js/jquery.onepagenav.js')
+        script(src='/public/js/main.js')
+        script(type='text/javascript', src='/public/js/jquery.plugin.js')
+        script(type='text/javascript', src='/public/js/jquery.datepick.js')
+        script(type='text/javascript', src='/public/css/jquery.datepick.css')
+        block script

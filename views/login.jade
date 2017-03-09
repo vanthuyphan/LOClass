@@ -1,0 +1,29 @@
+extend ./layout.jade
+block head
+
+block content
+
+    .container#login-from
+        .row.col-xs-1.col-md-3
+        .row.col-xs-12.col-md-4
+            h1 Login
+            .err=msg
+            form(role='form' method="POST" action="/login")
+                .form-group
+                    label(for='email') Email:
+                    input#email.form-control(type='email' name="email")
+                .form-group
+                    label(for='password') Password:
+                    input#password.form-control(type='password' name="password")
+                .form-group
+                    input.btn.btn-primary(type='submit' value="Login")
+
+block page-script
+    style.
+        #login-from {
+            margin-top: 150px;
+        }
+
+        .btn {
+            margin-top: 5px;
+        }

@@ -1,0 +1,214 @@
+extend ./layout.jade
+block head
+
+block content
+    .container#class-manager
+        .err=msg
+        form#addCourseForm
+            .row
+                .form-group.col-md-4
+                    label(for='course') Course
+                    select#course.form-control(name='course', onchange="loadClasses()", required)
+                    p#classes.help-block
+                    button#add-course-btn.btn.btn-success(type='button', onclick='addCourse()') Add Course
+        table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
+            thead
+                tr
+                    th Course
+                    th Description
+                    th Credits
+                    th Delete
+            tbody
+
+        h5#totalCredit Total
+        button#complete.btn.btn-success(type='button', onclick='saveCourses()') Complete
+        h3 Time Table
+        .timetable
+
+
+block page-script
+    style.
+        #class-manager{
+            margin-top: 150px;
+        }
+
+        .btn {
+            margin-top: 5px;
+        }
+    script.
+        var availableCourses = !{JSON.stringify(availableCourses)}
+        var courses = !{JSON.stringify(userCourses)};
+        var coursesCodes = [];
+        var classes = [];
+        var courseClasses = !{JSON.stringify(courseClasses)};
+        var registeredClasses = [];
+        render();
+        function render() {
+            var totalCredits = 0;
+            $('#table').find('tbody').empty();
+            coursesCodes = [];
+            $.each(courses, function (i, course) {
+                totalCredits += course.credits;
+                coursesCodes.push(course.code);
+                updateRegisteredClasses();
+                $('#table').find('tbody')
+                    .append($('<tr>')
+                        .append($('<td>').css('display', 'none')
+                            .append(course.code)
+                        )
+                        .append($('<td>')
+                            .append(course.name)
+                        )
+                        .append($('<td>')
+                            .append(course.description)
+                        )
+                        .append($('<td>')
+                            .append(course.credits)
+                        )
+                        .append($('<td>')
+                            .append("<button class='btn btn-info' onclick='removeCourse(" + course.code + ")'> Remove </button>")
+                        )
+                    )
+            })
+            $("#course").empty();
+            $.each(availableCourses, function (i, course) {
+                if (coursesCodes.indexOf(course.code) == -1) {
+                    $("#course").append($('<option>', {value: course.code, text: course.name}))
+                }
+            });
+            $("#totalCredit").html("Total Credits: " + totalCredits);
+            $("#complete").prop('disabled', totalCredits < 15)
+            loadClasses();
+            renderTimeTable();
+        }
+        function loadClasses() {
+            $('#add-course-btn').prop('disabled', true);
+            var course = $("#course").val();
+            $.get("/getClasses?course=" + course, function (res, err) {
+                $('#classes').html('')
+                classes = res.classes;
+                $.each(classes, function (i, claz) {
+                    $('#classes').append(claz.day + " ")
+                });
+                $('#classes')
+                    .append('<br>')
+                    .append(formatTime(classes[0].startTime) + " to " + formatTime(classes[0].endTime))
+                $('#add-course-btn').prop('disabled', false);
+            })
+        }
+        function addCourse() {
+            var selectedCourseVal = $('#course option:selected').val();
+            var selectedCourse = $.grep(availableCourses, function (e) {
+                return e.code == selectedCourseVal;
+            });
+            var selectedCourse = selectedCourse[0];
+            var selectedCourseCode = selectedCourse.code;
+
+            if (!isTimeLotAvailable()) {
+                $.alert({
+                    title: 'Alert!',
+                    content: 'The time lot for the course you have just selected is already occupied. Please pick another course!',
+                });
+                return;
+            }
+
+            courses.push({
+                code: selectedCourseCode,
+                name: selectedCourse.name,
+                description: selectedCourse.description,
+                credits: selectedCourse.credits
+            });
+            updateRegisteredClasses();
+            courseClasses[selectedCourseCode] = classes;
+            render();
+        }
+
+        function removeCourse(code) {
+            var deletedCourse = $.grep(courses, function (e) {
+                return e.code == code;
+            });
+            var deletedCourse = deletedCourse[0];
+            var deletedCourseCode = deletedCourse.code;
+            courses.splice(courses.indexOf(deletedCourse), 1);
+            updateRegisteredClasses();
+            coursesCodes.splice(coursesCodes.indexOf(deletedCourseCode), 1);
+            delete courseClasses[deletedCourseCode];
+            render();
+        }
+
+        function renderTimeTable() {
+            var timetable = new Timetable();
+
+            timetable.setScope(8, 19)
+
+            timetable.addLocations(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
+            $.each(courses, function (i, course) {
+                var code = course.code;
+                var classes = courseClasses[code];
+                $.each(classes, function (j, clazz) {
+                    timetable.addEvent(course.name, clazz.day, removeTimeZone(clazz.startTime), removeTimeZone(clazz.endTime));
+                });
+            });
+            var renderer = new Timetable.Renderer(timetable);
+            renderer.draw('.timetable');
+        }
+
+        function saveCourses() {
+            var courseCodes = '';
+            $.each(courses, function (i, course) {
+                if (course) courseCodes += course.code + ",";
+            });
+            courseCodes = courseCodes.substring(0, courseCodes.length - 1);
+            $.post("/saveCourses", {
+                userCourses: courseCodes
+            }, function (res, err) {
+                $.alert({
+                    title: 'Info!',
+                    content: 'Saved',
+                });
+            })
+        }
+
+        function updateRegisteredClasses() {
+            registeredClasses = [];
+            $.each(courses, function (i, course) {
+                registeredClasses = registeredClasses.concat(courseClasses[course.code]);
+            })
+        }
+
+        function formatTime(mySqlTime) {
+            var time = new Date(mySqlTime).toTimeString();
+            return time.substring(0, time.indexOf("GMT"));
+        }
+
+        function isTimeLotAvailable() {
+            var daysClasses = {};
+            $.each(registeredClasses, function (i, registeredClass) {
+                var day = registeredClass.day;
+                if (Object.keys(daysClasses).indexOf(day) == -1) {
+                    daysClasses[day] = [];
+                }
+                daysClasses[day].push(registeredClass);
+            })
+            for (var i = 0; i < classes.length; i++) {
+                var claz = classes[i];
+                if (Object.keys(daysClasses).indexOf(claz.day) > -1) {
+                    var registeredClassesTheSameDay = daysClasses[claz.day];
+                    for (var j = 0; j < registeredClassesTheSameDay.length; j++) {
+                        var registeredClass = registeredClassesTheSameDay[j];
+                        var tailCrash = claz.endTime > registeredClass.startTime && claz.startTime < registeredClass.startTime;
+                        var headCrash = claz.startTime < registeredClass.endTime && claz.endTime > registeredClass.endTime;
+                        var bellyCrash = (claz.startTime > registeredClass.startTime && claz.endTime < registeredClass.endTime);
+                        if (tailCrash || headCrash || bellyCrash) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        function removeTimeZone(datetime) {
+            var time = new Date(datetime)
+            return new Date(time.getFullYear(), time.getMonth(), time.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+        }

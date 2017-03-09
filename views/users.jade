@@ -1,0 +1,56 @@
+extend ./layout.jade
+block head
+
+block content
+    .container#users
+        .err=msg
+        table#usersTable.table.table-hover.dt-responsive.nowrap(style='width: 100%')
+            thead
+                tr
+                    th Name
+                    th Email
+                    th Courses
+            tbody
+                each user, i in users
+                    tr
+                        td #{user.name}
+                        td #{user.email}
+                        td
+                            button.btn.btn-primary(onclick='viewTimeTable(' + user.code + ')') View
+
+        h3 Time Table
+        .timetable
+
+
+block page-script
+    style.
+        #users {
+            margin-top: 150px;
+        }
+    script.
+        function viewTimeTable(userCode) {
+            $.post('userCourses', {userCode: userCode}, function (res, err) {
+                renderTimeTable(res.courseClasses, res.userCourses);
+            })
+        }
+        function renderTimeTable(courseClasses, courses) {
+            var timetable = new Timetable();
+
+            timetable.setScope(8, 19)
+
+            timetable.addLocations(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
+            $.each(courses, function (i, course) {
+                var code = course.code;
+                var classes = courseClasses[code];
+                $.each(classes, function (j, clazz) {
+                    timetable.addEvent(course.name, clazz.day, removeTimeZone(clazz.startTime), removeTimeZone(clazz.endTime));
+                });
+            });
+            var renderer = new Timetable.Renderer(timetable);
+            renderer.draw('.timetable');
+        }
+
+        function removeTimeZone(datetime) {
+            var time = new Date(datetime)
+            return new Date(time.getFullYear(), time.getMonth(), time.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+        }

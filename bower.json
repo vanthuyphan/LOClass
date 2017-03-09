@@ -1,0 +1,29 @@
+{
+  "name": "claz_manager",
+  "description": "A Time Table Class Manager",
+  "main": "claz_manager.js",
+  "authors": [
+    "Van Phan"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "components-font-awesome": "^4.6.1",
+    "timetable.js": "timetable#^0.6.2",
+    "jquery-confirm2": "craftpip/jquery-confirm#^3.1.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+  }
+}
