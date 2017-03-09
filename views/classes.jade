@@ -1,32 +1,27 @@
 extends layout.jade
 block links
 block content
-    section#services.section.section-padded
-        .container
-            .row.text-center.title
-                h2 Classes
-            .row.services
-                .col-md-4
-                    .service
-                        .icon-holder
-                            img.icon(src='/public/img/icons/heart-blue.png', alt='')
-                        h4.heading LO Originating 001
-                        p.description
-                            | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-                .col-md-4
-                    .service
-                        .icon-holder
-                            img.icon(src='/public/img/icons/guru-blue.png', alt='')
-                        h4.heading LO Originating 002
-                        p.description
-                            | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-                .col-md-4
-                    .service
-                        .icon-holder
-                            img.icon(src='/public/img/icons/weight-blue.png', alt='')
-                        h4.heading Power Training
-                        p.description
-                            | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-        .cut.cut-bottom
+    .container#class-manager
 
-block script
+    block script
+        style.
+            #class-manager {
+                margin-top: 150px;
+            }
+
+            .btn {
+                margin-top: 5px;
+            }
+
+            #table {
+                margin-bottom: 150px;
+            }
+        script.
+            function register(code) {
+                if (user && user.code) {
+
+                } else {
+
+                }
+            }
+

@@ -21,8 +21,35 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get("/courses", function(req, res) {
-     res.render("courses");
+router.get("/classes", function(req, res) {
+    db.getClasses(function(err, classes) {
+        res.render("classes", {classes: classes});
+    });
+
+});
+
+router.get("/admin_classes", function(req, res) {
+    db.getClasses(function(err, classes) {
+        res.render("admin/admin_classes", {classes: classes});
+    });
+
+});
+
+router.post("/addClass", function(req, res) {
+    console.log("SAve Class router");
+    db.saveClass(req.body, function(err) {
+        if (err) throw err;
+        res.redirect("admin_classes");
+        return;
+    });
+});
+
+router.post("/removeClass", function(req, res) {
+    db.removeClass(req.body.code, function(err) {
+        if (err) throw err;
+        res.send("removed");
+        return;
+    });
 });
 
 router.get("/admin_classes",function(req, res) {

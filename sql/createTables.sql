@@ -22,15 +22,16 @@ CREATE TABLE IF NOT EXISTS `User` (
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+DROP TABLE `Class`
 CREATE TABLE IF NOT EXISTS `Class` (
     `location` VARCHAR(200),
 	`code` BIGINT NOT NULL AUTO_INCREMENT,
-	`courseCode` BIGINT,
 	`address` NVARCHAR(200),
 	`fee` DOUBLE,
-	`size` DOUBLE,
-	PRIMARY KEY (`code`),
-	FOREIGN KEY (courseCode) REFERENCES Course(code)
+	`classSize` INT,
+	`datetime` VARCHAR(200),
+	`registed` INT,
+	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `ClassTime` (

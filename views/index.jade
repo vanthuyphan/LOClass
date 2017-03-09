@@ -15,56 +15,56 @@ block content
                 .row.intro-tables
                     .col-md-6
                         .intro-table.intro-table-first
-                            h5.white.heading Today's Schedule
+                            h5.white.heading Today's Classes
                             .owl-carousel.owl-schedule.bottom
                                 .item
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Early Exercise
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 8:30 AM - 10:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Muscle Building
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 10:30 AM - 12:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Cardio
+                                            h5.regular.white Seattle
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 1:30 PM - 3:00 PM
                                 .item
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Early Exercise
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 8:30 AM - 10:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Muscle Building
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 10:30 AM - 12:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Cardio
+                                            h5.regular.white Seattle
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 1:30 PM - 3:00 PM
                                 .item
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Early Exercise
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 8:30 AM - 10:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Muscle Building
+                                            h5.regular.white San Jose
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 10:30 AM - 12:00 AM
                                     .schedule-row.row
                                         .col-xs-6
-                                            h5.regular.white Cardio
+                                            h5.regular.white Seattle
                                         .col-xs-6.text-right
-                                            h5.white 8:30 - 10:00
+                                            h5.white 1:30 PM - 3:00 PM
                     .col-md-6
                         .intro-table.intro-table-third
                             h5.white.heading Happy Clients
@@ -73,38 +73,34 @@ block content
                                     h4.white.heading.content I couldn't be more happy with the results!
                                     h5.white.heading.light.author Adam Jordan
                                 .item
-                                    h4.white.heading.content I can't believe how much better I feel!
+                                    h4.white.heading.content I can't believe how much more I know!
                                     h5.white.heading.light.author Greg Pardon
                                 .item
-                                    h4.white.heading.content Incredible transformation and I feel so healthy!
+                                    h4.white.heading.content Incredible transformation and I feel so eager to practice my new skills!
                                     h5.white.heading.light.author Christina Goldman
-        section#services.section.section-padded
+        section#services.section
             .container
-                .row.text-center.title
-                    h2 Classes
-                .row.services
-                    .col-md-4
-                        .service
-                            .icon-holder
-                                img.icon(src='/public/img/icons/heart-blue.png', alt='')
-                            h4.heading LO Originating 001
-                            p.description
-                                | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-                    .col-md-4
-                        .service
-                            .icon-holder
-                                img.icon(src='/public/img/icons/guru-blue.png', alt='')
-                            h4.heading LO Originating 002
-                            p.description
-                                | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-                    .col-md-4
-                        .service
-                            .icon-holder
-                                img.icon(src='/public/img/icons/weight-blue.png', alt='')
-                            h4.heading Power Training
-                            p.description
-                                | A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.
-            .cut.cut-bottom
+                h3 Classes
+                table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
+                    thead
+                        tr
+                            th Location
+                            th Date/Time
+                            th Class Size
+                            th Fee
+                            th Address
+                            th Register
+                    tbody
+                        each claz, index in classes || {}
+                            tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                                td #{claz.location}
+                                td #{claz.dateTime}
+                                td #{claz.registed} / #{claz.classSize}
+                                td #{claz.fee}
+                                td #{claz.address}
+                                td
+                                    button.btn.btn-small.btn-blue(onclick='register(' + claz.code + ')')  Register
+
         section#team.section.gray-bg
             .container
                 .row.title.text-center
@@ -114,15 +110,15 @@ block content
                     .col-md-4
                     .col-md-4
                         .team.text-center
-                            .cover(style="background:url('/public/img/team/team-cover2.jpg'); background-size:cover;")
+                            .cover(style="background:url('/public/img/team/team-cover3.jpg'); background-size:cover;")
                                 .overlay.text-center
-                                    h3.white $69.00
-                                    h5.light.light-white 1 - 5 sessions / month
-                            img.avatar(src='/public/img/team/team1.jpg', alt='Team Image')
+                                    h3.white
+                            img.avatar(src='/public/img/team/team0.jpg', alt='Team Image')
                             .title
-                                h4 Eva Williams
-                                h5.muted.regular Personal Trainer
-                            a.btn.btn-blue-fill.ripple(href='#', data-toggle='modal', data-target='#modal1') Sign Up Now
+                                h4 Thuan Nguyen
+                                h5.muted.regular  Broker, CEO
+                            a.btn.btn-blue-fill.ripple(href='#', data-toggle='modal', data-target='#modal1') Contact Him
                     .col-md-4
+
         block script
 
