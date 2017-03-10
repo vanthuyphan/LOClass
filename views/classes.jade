@@ -276,7 +276,6 @@ block content
                                     th Address
                                     th Date/Time
                                     th Class Size
-                                    th Fee
                                     th Register
                             tbody
 
@@ -296,7 +295,6 @@ block content
                                     th Address
                                     th Date/Time
                                     th Class Size
-                                    th Fee
                                     th UnRegister
                             tbody
 
@@ -335,10 +333,7 @@ block content
                                 .append(claz.datetime)
                             )
                             .append($('<td>')
-                                .append(claz.classSize).append("/").append(claz.registered)
-                            )
-                            .append($('<td>')
-                                .append("$ ").append(claz.fee)
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='unRegisterCourse(" + claz.studentClassCode + ")'> Un Register </button>")
@@ -362,10 +357,7 @@ block content
                                 .append(claz.datetime)
                             )
                             .append($('<td>')
-                                .append(claz.registered || 0).append("/").append(claz.classSize)
-                            )
-                            .append($('<td>')
-                                .append("$ ").append(claz.fee)
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")
@@ -391,10 +383,7 @@ block content
                                 .append(claz.datetime)
                             )
                             .append($('<td>')
-                                .append(claz.registered || 0).append("/").append(claz.classSize)
-                            )
-                            .append($('<td>')
-                                .append("$ ").append(claz.fee)
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")

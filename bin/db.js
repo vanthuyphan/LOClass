@@ -162,20 +162,16 @@ db.registerClass = function (model, cb) {
         model.userCode,
         model.classCode
     ], function(err, result) {
-        console.log(result);
-        cb(err);
+        now.mysql.query("UPDATE `Class` SET registed = registed - 1 WHERE code = ?", [model.classCode], function(err, result) {
+            cb(err);
+        });
     });
 }
 
 db.unregisterClass = function (model, cb) {
     now.mysql.query("DELETE FROM StudentClass WHERE code=?;", [model.code], function(err, result) {
-        console.log("Dleeting" + result);
-        cb(err);
-    });
-}
-
-db.runRegisterClass = function (code) {
-    now.mysql.query("DELETE FROM `StudentClass` WHERE code ?", [code], function(err, result) {
-        cb(err);
+        now.mysql.query("UPDATE `Class` SET registed = registed + 1 WHERE code = ?", [model.classCode], function(err, result) {
+            cb(err);
+        });
     });
 }

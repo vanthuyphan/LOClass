@@ -63,7 +63,6 @@ router.get("/account", function(req, res) {
 
 router.get("/classes", function(req, res) {
     if (req.user && req.user.code) {
-        console.log("")
         db.getClassesWithUser(req.user.code, function (err, classes) {
             if (err) throw err;
             res.render("classes", {classes: classes});
