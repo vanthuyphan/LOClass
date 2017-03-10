@@ -1,0 +1,97 @@
+extends ../layout.jade
+block content
+    section#classes.cart-page.section-padding
+        .container
+            .section-title.text-center
+                h3
+                    span ALL
+                    |  CLASSES
+            .row
+                .col-xs-12
+                    .table-responsive.table-one.margin-minus.section-padding-bottom
+                        table.spacing-table.text-center
+                            thead
+                                tr
+                                    th Location
+                                    th Date/Time
+                                    th Class Size
+                                    th Fee
+                                    th Address
+                                    th Students
+                            tbody
+                                each claz, index in classes || []
+                                    tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                                        td #{claz.location}
+                                        td #{claz.datetime}
+                                        td #{claz.classSize}
+                                        td #{claz.fee}
+                                        td #{claz.address}
+                                        td
+                                            button.btn.btn-small.btn-blue(onclick='viewStudent(' + claz.code + ')')  VIEW
+
+    section#students.cart-page.section-padding
+        .container
+            .section-title.text-center
+                h3
+                    span STUDENTS
+            .row
+                .col-xs-12
+                    .table-responsive.table-one.margin-minus.section-padding-bottom
+                        table#studentsTable.spacing-table.text-center
+                            thead
+                                tr
+                                    th First Name
+                                    th Last Name
+                                    th Email
+                                    th Phone
+                                    th Note
+                                    th Remove
+                            tbody
+block script
+    style.
+        #classes {
+            margin-top: 150px;
+        }
+
+    script.
+        var savedClassCode = '';
+        function viewStudent(classCode) {
+            savedClassCode = classCode;
+            $.post('/getStudents', {classCode: classCode}, function (res, err) {
+                var students = res.students;
+                $('#studentsTable').find('tbody').empty();
+                $.each(students, function (index, student) {
+                    $('#studentsTable').find('tbody')
+                        .append($('<tr>')
+                            .append($('<td>').css('display', 'none')
+                                .append(student.code)
+                            )
+                            .append($('<td>')
+                                .append(student.first_name)
+                            )
+                            .append($('<td>')
+                                .append(student.last_name)
+                            )
+                            .append($('<td>')
+                                .append(student.email)
+                            )
+                            .append($('<td>')
+                                .append(student.phone)
+                            )
+                            .append($('<td>')
+                                .append(student.note)
+                            )
+                            .append($('<td>')
+                                .append("<button class='submit-text' onclick='removeStudent(" + student.code + ")'> Remove </button>")
+                            )
+                        )
+                });
+            })
+        }
+
+        function removeStudent(studentCode) {
+            alert(studentCode)
+            $.post('/removeStudent', {classCode: savedClassCode, studentCode: studentCode}, function (err, res) {
+                location.reload();
+            });
+        }

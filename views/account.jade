@@ -1,0 +1,199 @@
+extends layout.jade
+block content
+    section#account.account-page.section-padding
+        .container
+            .row
+                .col-sm-6
+                    .single-check.m-bottom50
+                        .row
+                            form(action='mail.php', method='post')
+                                .single-input.clearfix
+                                    .col-xs-12
+                                        .check-title
+                                            h3 Billing Address
+                                            p To add a new address, please fill out the form below.
+                                    .col-sm-6
+                                        label First Name:
+                                        .input-text
+                                            input(type='text', name='name')
+                                    .col-sm-6
+                                        label Last Name:
+                                        .input-text
+                                            input(type='text', name='name')
+                                    .col-sm-6
+                                        label Email:
+                                        .input-text
+                                            input(type='text', name='email')
+                                    .col-sm-6
+                                        label Phone:
+                                        .input-text
+                                            input(type='text', name='phone')
+                                    .col-xs-12
+                                        label Country:
+                                        .input-text
+                                            input(type='text', name='country')
+                                    .col-xs-12
+                                        label Address:
+                                        .input-text
+                                            input(type='text', name='address')
+                                    .col-xs-12
+                                        label City/Town:
+                                        .input-text
+                                            input(type='text', name='city')
+                                    .col-xs-12
+                                        label Additional information:
+                                        .input-text
+                                            textarea(name='message', rows='3')
+                                    .col-xs-12
+                                        .submit-text
+                                            input(type='submit', name='submit', value='Save')
+                    .single-check.responsive
+                        .order-history.check-title
+                            h3 Order history
+                            p Here are the orders you've placed since your account was created.
+                            span You have not placed any orders.
+                .col-sm-6
+                    .single-check.m-bottom50
+                        .row
+                            form(action='mail.php', method='post')
+                                .single-input.clearfix
+                                    .col-xs-12
+                                        .check-title
+                                            h3 Your personal information
+                                            p Please be sure to update your personal information if it has changed
+                                        .social-title.mail-femail
+                                            span * Social title
+                                            .custom-radio
+                                                input#male(type='radio', name='gender', value='Male')
+                                                label(for='male')
+                                                    span Mr.
+                                                input#female(type='radio', name='gender', value='Female')
+                                                label(for='female')
+                                                    span Msr.
+                                    .col-xs-12
+                                        label Your Full Name:
+                                        .input-text
+                                            input(type='text', name='name')
+                                    .col-xs-12
+                                        label Email:
+                                        .input-text
+                                            input(type='text', name='email')
+                                    .col-xs-12
+                                        .date-birth
+                                            label Date of Birth:
+                                            .row
+                                                .col-sm-4
+                                                    .custom-select
+                                                        select.form-control
+                                                            option 1
+                                                            option 2
+                                                            option 3
+                                                            option 4
+                                                            option 5
+                                                            option 6
+                                                            option 7
+                                                            option 8
+                                                            option 9
+                                                            option 10
+                                                            option 11
+                                                            option 12
+                                                            option 13
+                                                            option 14
+                                                            option 15
+                                                            option 16
+                                                            option 17
+                                                            option 18
+                                                            option 19
+                                                            option 20
+                                                            option 21
+                                                            option 22
+                                                            option 23
+                                                            option 24
+                                                            option 25
+                                                            option 26
+                                                            option 27
+                                                            option 28
+                                                            option 29
+                                                            option 30
+                                                .col-sm-4
+                                                    .custom-select
+                                                        select.form-control
+                                                            option January
+                                                            option February
+                                                            option March
+                                                            option April
+                                                            option May
+                                                            option June
+                                                            option July
+                                                            option August
+                                                            option September
+                                                            option October
+                                                            option November
+                                                            option December
+                                                .col-sm-4
+                                                    .custom-select
+                                                        select.form-control
+                                                            option 1990
+                                                            option 1991
+                                                            option 1992
+                                                            option 1993
+                                                            option 1994
+                                                            option 1995
+                                                            option 1996
+                                                            option 1997
+                                                            option 1998
+                                                            option 1999
+                                                            option 2000
+                                                            option 2001
+                                                            option 2002
+                                                            option 2003
+                                                            option 2004
+                                                            option 2005
+                                                            option 2006
+                                                            option 2007
+                                                            option 2008
+                                                            option 2009
+                                                            option 2010
+                                                            option 2011
+                                                            option 2012
+                                                            option 2013
+                                                            option 2014
+                                                            option 2016
+                                                            option 2016
+                                                            option 2017
+                                                            option 2018
+                                                            option 2019
+                                                            option 2020
+                                    .col-xs-12
+                                        label Current Password:
+                                        .input-text
+                                            input(type='password', name='password')
+                                    .col-xs-12
+                                        label New Password:
+                                        .input-text
+                                            input(type='password', name='password')
+                                    .col-xs-12
+                                        label Confirmation:
+                                        .input-text
+                                            input(type='password', name='password')
+                                    .col-xs-12
+                                        .sing-checkbox
+                                            label
+                                                input(type='checkbox', name='rememberme')
+                                                |                                                    Sign up for our newsletter!
+                                            label
+                                                input(type='checkbox', name='rememberme')
+                                                |                                                    Receive special offers from our partners!
+                                        .submit-text
+                                            input(type='submit', name='submit', value='Save')
+                    .single-check
+                        .check-title.order-history
+                            h3 Order history
+                            p Here are the orders you've placed since your account was created.
+                            span You have not placed any orders.
+    block script
+        style.
+            #account {
+                margin-top: 150px;
+            }
+

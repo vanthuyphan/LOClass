@@ -1,124 +1,55 @@
 extends layout.jade
-block links
 block content
-        header#intro
-            .container
-                .table
-                    .header-text
-                        .row
-                            .col-md-12.text-center
-                                h1.white.typed Loan Originating classes from the best broker in town.
-                                span.typed-cursor |
-        section
-            .cut.cut-top
-            .container
-                .row.intro-tables
-                    .col-md-6
-                        .intro-table.intro-table-first
-                            h5.white.heading Today's Classes
-                            .owl-carousel.owl-schedule.bottom
-                                .item
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 8:30 AM - 10:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 10:30 AM - 12:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white Seattle
-                                        .col-xs-6.text-right
-                                            h5.white 1:30 PM - 3:00 PM
-                                .item
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 8:30 AM - 10:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 10:30 AM - 12:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white Seattle
-                                        .col-xs-6.text-right
-                                            h5.white 1:30 PM - 3:00 PM
-                                .item
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 8:30 AM - 10:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white San Jose
-                                        .col-xs-6.text-right
-                                            h5.white 10:30 AM - 12:00 AM
-                                    .schedule-row.row
-                                        .col-xs-6
-                                            h5.regular.white Seattle
-                                        .col-xs-6.text-right
-                                            h5.white 1:30 PM - 3:00 PM
-                    .col-md-6
-                        .intro-table.intro-table-third
-                            h5.white.heading Happy Clients
-                            .owl-testimonials.bottom
-                                .item
-                                    h4.white.heading.content I couldn't be more happy with the results!
-                                    h5.white.heading.light.author Adam Jordan
-                                .item
-                                    h4.white.heading.content I can't believe how much more I know!
-                                    h5.white.heading.light.author Greg Pardon
-                                .item
-                                    h4.white.heading.content Incredible transformation and I feel so eager to practice my new skills!
-                                    h5.white.heading.light.author Christina Goldman
-        section#services.section
-            .container
-                h3 Classes
-                table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
-                    thead
-                        tr
-                            th Location
-                            th Date/Time
-                            th Class Size
-                            th Fee
-                            th Address
-                            th Register
-                    tbody
-                        each claz, index in classes || {}
-                            tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                                td #{claz.location}
-                                td #{claz.dateTime}
-                                td #{claz.registed} / #{claz.classSize}
-                                td #{claz.fee}
-                                td #{claz.address}
-                                td
-                                    button.btn.btn-small.btn-blue(onclick='register(' + claz.code + ')')  Register
+    // slider section start
+    .slider-area.slider-one.clearfix
+        #mainslider.slider
+            div(data-src='/public/img/slider/1.jpg')
+                .d-table
+                    .d-tablecell
+                        .container
+                            .row
+                                .col-xs-12
+                                    .slide-text
+                                        h1.animated.fadeInDown best cycling experience
+                                        .shape.animated.flipInX
+                                            img(src='/public/img/slider/shape.png', alt='')
+                                        h4.animated.fadeIn become the world leader on the internet for the sport of cycling.
+    section#class.cart-page.section-padding
+        .container
+            .row
+                .col-xs-12
+                    .table-responsive.table-one.margin-minus.section-padding-bottom
+                        .section-title.text-center
+                            h3
+                                span LOAN PROCESSING
+                                |  CLASSES
+                            .actions-btn
+                                    a.shop-btn(href='/classes') View Classes
 
-        section#team.section.gray-bg
-            .container
-                .row.title.text-center
-                    h2.margin-top Your Instructor
-                    h4.light.muted One of the top broker in the country
-                .row
-                    .col-md-4
-                    .col-md-4
-                        .team.text-center
-                            .cover(style="background:url('/public/img/team/team-cover3.jpg'); background-size:cover;")
-                                .overlay.text-center
-                                    h3.white
-                            img.avatar(src='/public/img/team/team0.jpg', alt='Team Image')
-                            .title
-                                h4 Thuan Nguyen
-                                h5.muted.regular  Broker, CEO
-                            a.btn.btn-blue-fill.ripple(href='#', data-toggle='modal', data-target='#modal1') Contact Him
-                    .col-md-4
-
-        block script
-
+    section.blog-area.blog-one.section-padding
+        .container
+            .row
+                .col-xs-12.col-sm-8.col-md-6.col-text-center
+                    .section-title.text-center
+                        h3
+                            span FROM
+                            |  BLOG
+                        .shape
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+            .row
+                each post, index in posts || []
+                    .col-xs-12.col-sm-6.col-md-4
+                        .blog-item
+                            .blog-img
+                                a(href='product-details.html')
+                                    img(src='/public/img/blog/1.jpg', alt='Blog')
+                            .blog-text.clearfix
+                                hr.line
+                                a(href='single-blog.html')
+                                    h4 Lights & Motion Night Light
+                                p
+                                    span 15 dec
+                                p
+                                    | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form...
+                                .view-more
+                                    a.shop-btn(href='single-blog.html') View More

@@ -1,0 +1,26 @@
+extends layout.jade
+block content
+    section#forgot.login-page.section-padding
+        #{forgotMess}
+        .container
+            .row
+                .col-sm-6
+                    .row
+                        .single-check
+                            form(action='/forgot', method='post')
+                                .single-input.p-bottom50.clearfix
+                                    .col-xs-12
+                                        .check-title
+                                            h3 Forgot Password
+                                    .col-xs-12
+                                        label Email:
+                                        .input-text
+                                            input(type='text', name='email' value=email || '')
+                                        .submit-text
+                                            input(type='submit', name='submit', value='Send Restore Email')
+
+    block script
+        style.
+            #forgot {
+                margin-top: 150px;
+            }

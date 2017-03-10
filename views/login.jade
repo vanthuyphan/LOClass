@@ -1,29 +1,80 @@
-extend ./layout.jade
-block head
-
+extends layout.jade
 block content
+    section#login.login-page.section-padding
+        .container
+            .row
+                .col-sm-6
+                    .row
+                        .single-check
+                            form(action='/login', method='post')
+                                p #{loginMess}
+                                .single-input.p-bottom50.clearfix
+                                    .col-xs-12
+                                        .check-title
+                                            h3 Login
 
-    .container#login-from
-        .row.col-xs-1.col-md-3
-        .row.col-xs-12.col-md-4
-            h1 Login
-            .err=msg
-            form(role='form' method="POST" action="/login")
-                .form-group
-                    label(for='email') Email:
-                    input#email.form-control(type='email' name="email")
-                .form-group
-                    label(for='password') Password:
-                    input#password.form-control(type='password' name="password")
-                .form-group
-                    input.btn.btn-primary(type='submit' value="Login")
+                                    .col-xs-12
+                                        label Email:
+                                        .input-text
+                                            input(type='text', name='email')
+                                    .col-xs-12
+                                        label Password:
+                                        .input-text
+                                            input(type='password', name='password')
+                                    .col-xs-12
+                                        .forget
+                                            a(href='/forgot') Forget your password?
+                                    .col-xs-12
+                                        .submit-text
+                                            input(type='submit', name='submit', value='Login')
+                .col-sm-6
+                    .single-input.p-bottom50.clearfix
+                        form#register_form(action='/register', method='post')
+                            p #{registerMess}
+                            .row
+                                .col-xs-12
+                                    .check-title
+                                        h3 New Customer
+                                .col-sm-6
+                                    label First Name:
+                                    .input-text
+                                        input#first_name(type='text', name='first_name')
+                                .col-sm-6
+                                    label Last Name:
+                                    .input-text
+                                        input#last_name(type='text', name='last_name')
+                                .col-sm-6
+                                    label Email:
+                                    .input-text
+                                        input#email(type='text', name='email')
+                                .col-sm-6
+                                    label Phone:
+                                    .input-text
+                                        input#phone(type='text', name='phone')
+                                .col-xs-12
+                                    label Password:
+                                    .input-text
+                                        input#password(type='password', name='password')
+                                .col-xs-12
+                                    label Confirm Password:
+                                    .input-text
+                                        input#confirm_password(type='password', name='confirm')
+                                        p#confirm_help
+                                .col-xs-12
+                                    .billing-checkbox
+                                        input#subscribe.checkbox(type='checkbox', name='billing-address', value='1')
+                                        label Receive the latest blog posts!
+                                    .submit-text
+                                        input(type='submit', value='Register')
 
-block page-script
-    style.
-        #login-from {
-            margin-top: 150px;
-        }
+    block script
+        style.
+            #login {
+                margin-top: 150px;
+            }
 
-        .btn {
-            margin-top: 5px;
-        }
+        script.
+            var hideRegister = !{JSON.stringify(hideRegister)}
+            if (hideRegister) {
+                $('#register_form').hide();
+            }

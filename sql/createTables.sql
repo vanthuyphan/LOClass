@@ -20,6 +20,9 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`zipcode` VARCHAR(10),
 	`hasLOLicense` SMALLINT,
 	`hasRELicense` SMALLINT,
+	`verified` SMALLINT,
+	`subscribe` SMALLINT,
+	`isAdmin` SMALLINT,
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -31,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Class` (
 	`fee` DOUBLE,
 	`classSize` INT,
 	`datetime` VARCHAR(200),
-	`registed` INT,
+	`registed` INT DEFAULT 0,
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -42,6 +45,15 @@ CREATE TABLE IF NOT EXISTS `ClassTime` (
 	`endTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`code`),
 	FOREIGN KEY (classCode) REFERENCES Class(code)
+) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `StudentClass` (
+	`code` BIGINT NOT NULL AUTO_INCREMENT,
+	`classCode` BIGINT,
+	`userCode` BIGINT,
+	PRIMARY KEY (`code`),
+	FOREIGN KEY (classCode) REFERENCES Class(code),
+	FOREIGN KEY (userCode) REFERENCES User(code)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 INSERT INTO `User` VALUES (1, 'v4n', 'van@gmail.com', 'Van Phan', 'pppppp', '', 0);

@@ -1,0 +1,57 @@
+mixin signup(id)
+    #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h3 Have an Account?
+        .modal-body
+            .well
+                ul.nav.nav-tabs
+                    li.active
+                        a(href='#login', data-toggle='tab') Login
+                    li
+                        a(href='#create', data-toggle='tab') Create Account
+                #myTabContent.tab-content
+                    #login.tab-pane.active.in
+                        form.form-horizontal(action='/login', method='POST')
+                            fieldset
+                                #legend
+                                    legend Login
+                                .control-group
+                                    // Username
+                                    label.control-label(for='username') Email
+                                    .controls
+                                        input#username.input-xlarge(type='text', name='email', placeholder='')
+                                .control-group
+                                    // Password
+                                    label.control-label(for='password') Password
+                                    .controls
+                                        input#password.input-xlarge(type='password', name='password', placeholder='')
+                                .control-group
+                                    // Button
+                                    .controls
+                                        button.btn.btn-success Login
+                    #create.tab-pane.fade
+                        form.form-horizontal(action='/register', method='POST')
+                            fieldset
+                                #legend
+                                    legend Register
+                                .control-group
+                                    // Username
+                                    label.control-label(for='username') Email
+                                    .controls
+                                        input#username.input-xlarge(type='text', name='email', placeholder='')
+                                .control-group
+                                    // Password
+                                    label.control-label(for='password') Password
+                                    .controls
+                                        input#password.input-xlarge(type='password', name='password', placeholder='')
+                                .control-group
+                                    // Password
+                                    label.control-label(for='password') Confirm
+                                    .controls
+                                        input#password.input-xlarge(type='password', name='confirm', placeholder='')
+                                .control-group
+                                    // Button
+                                    .controls
+                                        button.btn.btn-success Create Account
+

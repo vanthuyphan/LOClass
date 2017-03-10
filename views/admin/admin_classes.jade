@@ -1,5 +1,4 @@
 extends ../layout.jade
-block links
 block content
     .container#class-manager
         .err=msg
@@ -10,11 +9,11 @@ block content
                     label(for='location') Location
                     input#location.form-control(name='location', required)
                 .form-group
-                    label(for='time') Date/Time
-                    input#time.form-control(name='time', required)
+                    label(for='datetime') Date/Time
+                    input#datetime.form-control(name='datetime', required)
                 .form-group
-                    label(for='size') Class Size
-                    input#size.form-control(name='size', required)
+                    label(for='classSize') Class Size
+                    input#classSize.form-control(name='classSize', required)
                 .form-group
                     label(for='fee') Fee
                     input#fee.form-control(name='fee', required)
@@ -36,10 +35,10 @@ block content
                         th Address
                         th Remove
                 tbody
-                    each claz, index in classes
+                    each claz, index in classes || []
                         tr(class=(i % 2 == 0) ? 'odd' : 'even')
                             td #{claz.location}
-                            td #{claz.dateTime}
+                            td #{claz.datetime}
                             td #{claz.classSize}
                             td #{claz.fee}
                             td #{claz.address}

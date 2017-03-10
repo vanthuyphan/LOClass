@@ -1,3 +1,4 @@
 /logs/*
 /bower_components/*
 /node_modules/*
+config.ini

@@ -3,8 +3,7 @@ var logger = require("./bin/now/logger.js");
 var mysql = require("./bin/now/mysql.js");
 var web = require("./bin/web.js");
 var db = require("./bin/db.js");
-
-
+var mailer = require("./bin/mailer.js");
 
 var now = {};
 
@@ -29,11 +28,14 @@ exports.init = function(iniFile, app) {
                 db.init(now, function(err) {
                     if (err) throw err;
 
-                    web.init(now, function(err) {
-                        if (err) throw err;
+                    mailer.init(now, function () {
+                        web.init(now, function(err) {
+                            if (err) throw err;
 
-                        console.log("App link: %s", now.ini.web.url);
-                    });
+                            console.log("App link: %s", now.ini.web.url);
+                        });
+                    })
+
                 });
             });
         });
