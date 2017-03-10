@@ -1,6 +1,6 @@
 extends layout.jade
 block content
-    section#class.product-details.section-padding-top
+    section#details.product-details.section-padding-top
         .container
             .row
                 .col-xs-12
@@ -269,7 +269,7 @@ block content
             .row
                 .col-xs-12
                     .table-responsive.table-one.margin-minus.section-padding-bottom
-                        table.spacing-table.text-center
+                        table#class.spacing-table.text-center
                             thead
                                 tr
                                     th Location
@@ -302,7 +302,7 @@ block content
 
     block script
         style.
-            #class {
+            #details {
                 margin-top: 150px;
             }
         script.
@@ -318,8 +318,6 @@ block content
                         remainingClasses.push(claz);
                     }
                 })
-                console.log("My class" + myClasses);
-                console.log("A;; class" + remainingClasses);
                 $('#myClasses').find('tbody').empty();
                 $.each(myClasses, function (index, claz) {
                     $('#myClasses').find('tbody')
