@@ -101,7 +101,6 @@ db.getUsers = function(cb) {
 
 db.getClasses = function(cb) {
     now.mysql.query("SELECT * FROM `Class`", function(err, rows) {
-        console.log("Getting classses")
         if (rows) {
             cb(err, rows);
         } else {
@@ -111,7 +110,6 @@ db.getClasses = function(cb) {
 };
 
 db.getStudents = function(classCode, cb) {
-    console.log("Getting Student")
     now.mysql.query("SELECT User.code, first_name, last_name, phone, email, note FROM `User` JOIN StudentClass ON StudentClass.userCode =  User.code WHERE StudentClass.`classCode` = ?;", [classCode], function(err, rows) {
         if (rows) {
             cb(err, rows);

@@ -29,8 +29,7 @@ router.use(function(req, res, next) {
 
 router.post("/sendMessage", function(req, res) {
     var input = req.body;
-    input.subject = "Client Query";
-    console.log(input.message);
+    input.subject = "Client Query" + input.subject;
     input.to = now.ini.gmail.user;
     now.mailer.sendMail(input, "clientQuery", function(err) {
         if (err) throw err;
@@ -79,7 +78,6 @@ router.get("/classes", function(req, res) {
 
 router.get("/addClasses", function(req, res) {
     db.getClasses(function(err, classes) {
-        console.log(classes);
         res.render("admin/admin_classes", {classes: classes});
     });
 
@@ -100,7 +98,6 @@ router.get("/students", function(req, res) {
 });
 
 router.post("/getStudents", function(req, res) {
-    console.log("code" + req.body.classCode)
     db.getStudents(req.body.classCode, function(err, students) {
         console.log(students);
         res.send({students: students});
@@ -108,10 +105,9 @@ router.post("/getStudents", function(req, res) {
 });
 
 router.post("/addClass", function(req, res) {
-    console.log("SAve Class router");
     db.saveClass(req.body, function(err) {
         if (err) throw err;
-        res.redirect("admin_classes");
+        res.redirect("addClasses");
         return;
     });
 });
@@ -122,16 +118,6 @@ router.post("/removeClass", function(req, res) {
         res.send("removed");
         return;
     });
-});
-
-router.get("/admin_classes",function(req, res) {
-    //TODO check for permission
-    res.render("admin/admin_classes");
-});
-
-router.get("/test",function(req, res) {
-    //TODO check for permission
-    res.render("test");
 });
 
 router.get("/", function(req, res) {

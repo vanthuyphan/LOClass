@@ -54,17 +54,18 @@ html.no-js(lang='en')
                                         li
                                             a(href='/') Home
                                         li
-                                            a(href='/classes') Classes
+                                            a(href='/classes') Course
                                         li
                                             a(href='/about') About
                                         if (user && user.code && user.isAdmin)
                                             li
-                                                a(href='/addClasses') Add Classes
+                                                a(href='/addClasses') Manage Course
                                             li
-                                                a(href='/students') Students
+                                                a(href='/students') Manage Students
                                         if (user && user.code)
                                             li
                                                 a(href='/account') My Account
+
                                             li
                                                 a(href='/logout') Log Out
                                         else

@@ -1,6 +1,266 @@
 extends layout.jade
 block content
-    section#class.cart-page.section-padding
+    section#class.product-details.section-padding-top
+        .container
+            .row
+                .col-xs-12
+                    h2 Course Details
+                    .pro-des-tab
+                        .tab-menu
+                            ul
+                                li.active
+                                    a(data-toggle='tab', href='#pre') LICENSING REQUIREMENTS
+                                li
+                                    a(data-toggle='tab', href='#info') INFORMATION
+                                li
+                                    a(data-toggle='tab', href='#instructor') INSTRUCTOR
+                                li
+                                    a(data-toggle='tab', href='#tags') SYLLABUS
+                                li
+                                    a(data-toggle='tab', href='#docs') DOCUMENTS
+                        .tab-content.margin50
+                            #pre.tab-pane.fade.in.active
+                                .des-text
+                                    | All originators are required to obtain a state NMLS license.   In order to obtain the license, you must:
+                                    br
+                                    | 1. Complete a 20-hour Pre-license Education course (some states require 2 or 3 extra hours of education).
+                                    br
+                                    | 2. Pass the state and national exam.
+                            #info.tab-pane.fade.in.single-blog-page
+                                .des-text
+                                    p
+                                        | We expect that you should be able to obtain the NMLS Loan Originator license.  Loan Factory will focus on the practical training that will help you become a successful Loan Originator.  Therefore, there will be two classes:
+                                    br
+                                    p
+                                        | Pre-license Online Education Class: We have decided to partner with Loan Officer School to provide you with the 20-hour pre-license education.  You will need to visit their website www.LoanOfficerSchool.com (make sure it is linked to http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course) and register for an online class that fits your schedule.  The fee for this class is $379.  Please make sure to use DISCOUNT CODE loanfactory when you check out the class. It is IMPORTANT that you use this code when registering.  Otherwise, we will not have your information.
+                                    br
+                                    p
+                                        | Loan Factory Class: After taking the Pre-license Education Class above, we will spend 1 full day in a classroom to learn about the tools and knowledge needed to be a successful Loan Originator.  The class will cover PRACTICAL aspects of being a loan originator.  The class is comprised of live instruction, group discussions, and case studies.
+                                    br
+                                    p
+                                        | We will cover these topics in our class:
+                                    br
+                                    | 1. Welcome and Overview
+                                    br
+                                    | 2. Product Guidelines and Selection
+                                    br
+                                    | 3.  Understand Loan Programs (Fixed vs. ARM) and Loan Types (Conventional, Jumbo, FHA, VA, USDA, QM Loans, Non-QM Loans)
+                                    br
+                                    | 4. How to calculate Income (W-2, Self-employment, Bonus, Overtime, Rental), Expense and qualify your borrower
+                                    br
+                                    | 5. Case Studies
+                                    br
+                                    | 6. How to run a rate quote and pick the best lender for your borrower
+                                    br
+                                    | 7. Group Discussions
+                                    br
+                                    | 8. How to understand the borrower’s credit report
+                                    br
+                                    | 9. Understand a loan’s life cycle from start to finish
+                                    br
+                                    | 10. First-time buyer programs (MCC, City’s, County’s programs, CHDAP, etc)
+                                    br
+                                    | 11. How to interview a borrower and understand their situation in order to provide the best options
+                                    br
+                                    | 12. Managing and Marketing Your Pipeline
+                                    br
+                                    p
+                                        | Upon completion of the class, you may have a chance to obtain real-world experience by working with our experienced loan processor or becoming a Loan Factory loan originator.
+                                    br
+                                    p
+                                        | The fee for the Loan Factory class is $221.  You can pay this fee on the day of the class.  The total fee that you will pay is $600 (for both classes).  Loan Factory will reimburse you the full $600 fee if you obtain the license and close a loan with Loan Factory.  You must register with www.LoanOfficerSchool.com (make sure it is linked to http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course) using DISCOUNT CODE loanfactory in order to get the $600 reimbursed.  Please contact us if you have any problems with registration 408-292-9222
+                                    br
+                                    p
+                                        | Time: All day on Saturday, from 8am to 5pm
+                                    br
+                                    p
+                                        | Please register and finish the class at www.loanofficerschool.com before you attend Loan Factory’s class.
+                            #instructor.tab-pane.fade.in.single-blog-page
+                                .des-text
+                                    | About Thuan Nguyen:
+                                    br
+                                    p
+                                        | Thuan Nguyen is the broker and founder of Loan Factory, Inc.
+                                        br
+                                        | With less than 10 years of experience, he has built one of the largest mortgage brokerages in the country.
+                                        br
+                                        | He has personally closed over 1000 loans in 2016 and over 3000 loans in his career.
+                            #tags.tab-pane.fade.in.single-blog-page
+                                .des-text
+                                    #accordion2.panel-group
+                                        | Below please find the topics we will cover in this course.
+                                        br
+                                        | After each session, homework will be assigned to you in Blackboard.
+                                        br
+                                        | The homework varies each session, and are a combination of assignments and short quizzes. There is also a case study that we will work on throughout the course.
+                                        .panel.panel-default
+                                            #headingOne.panel-heading
+                                                h4.panel-title
+                                                    a(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+                                                        | Session 1: Welcome & Overview
+                                            #collapseOne.panel-collapse.collapse.in
+                                                .panel-body
+                                                    | Instructor introduction
+                                                    br
+                                                    | Overview of course expectations
+                                                    br
+                                                    | Setup of Smith case study
+                                        .panel.panel-default
+                                            #headingTwo.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo')
+                                                        | Session 2: Product Guidelines and Selection
+                                            #collapseTwo.panel-collapse.collapse
+                                                .panel-body
+                                                    | Identifying appropriate loan products to accomplish transaction goal
+                                                    br
+                                                    | Creating loan options
+                                                    br
+                                                    | Identifying advantages and disadvantages of loan options
+                                                    br
+                                                    | Interpreting investor matrices
+                                                    br
+                                                    | Presenting options to the borrower
+                                        .panel.panel-default
+                                            #headingThree.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                                                        | Session 3: Pricing Interest Rates and Risk
+                                            #collapseThree.panel-collapse.collapse
+                                                .panel-body
+                                                    | Loan level pricing adjustments
+                                                    br
+                                                    | Transaction risk
+                                                    br
+                                                    | Borrower risk
+                                                    br
+                                                    | Property risk
+                                                    br
+                                                    | LPC vs BPC transactions
+                                                    br
+                                                    | Lock issues – unlocked loan risk
+                                        .panel.panel-default
+                                            #headingFour.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseFour', aria-expanded='false', aria-controls='collapseFour')
+                                                        | Session 4: TRID Compliance
+                                            #collapseFour.panel-collapse.collapse
+                                                .panel-body
+                                                    | Background and intent
+                                                    br
+                                                    | Compliance requirements
+                                                    br
+                                                    | Forms review
+                                                    br
+                                                    | Discussion
+                                                    br
+                                                    | o Current perceptions
+                                                    br
+                                                    | o Current practices
+                                                    br
+                                                    | The difference between APR and TIP
+                                                    br
+                                                    | TRID regulation review for origination practices
+                                                    br
+                                                    | TRID forms review using case study
+                                        .panel.panel-default
+                                            #headingFive.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseFive', aria-expanded='false', aria-controls='collapseFive')
+                                                        | Session 5: Documenting the File and Calculating Income
+                                            #collapseFive.panel-collapse.collapse
+                                                .panel-body
+                                                    | Looking at the transaction from underwriter’s perspective
+                                                    br
+                                                    | Hidden traps of credit review Required documents – knowing what to ask for
+                                                    br
+                                                    | Translating taxable income into qualifying income
+                                                    br
+                                                    | o Discussion of 4506-T requirements
+                                                    br
+                                                    | Qualified mortgages and ability to repay
+                                                    br
+                                                    | Employment stability issues
+                                                    br
+                                                    | o Review personal and business returns
+                                                    br
+                                                    | Relevance of all assets
+                                        .panel.panel-default
+                                            #headingSix.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseSix', aria-expanded='false', aria-controls='collapseSix')
+                                                        | Session 6: Case Study Wrap Up – Group Discussion
+                                            #collapseSix.panel-collapse.collapse
+                                                .panel-body
+                                                    | Looking at the transaction from underwriter’s perspective
+                                                    br
+                                                    | Hidden traps of credit review Required documents – knowing what to ask for
+                                                    br
+                                                    | Translating taxable income into qualifying income
+                                                    br
+                                                    | o Discussion of 4506-T requirements
+                                                    br
+                                                    | Qualified mortgages and ability to repay
+                                                    br
+                                                    | Employment stability issues
+                                                    br
+                                                    | o Review personal and business returns
+                                                    br
+                                                    | Relevance of all assets
+                                        .panel.panel-default
+                                            #headingSeven.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseSeven', aria-expanded='false', aria-controls='collapseSeven')
+                                                        | Session 7: Value and Challenges of Purchases
+                                            #collapseSeven.panel-collapse.collapse
+                                                .panel-body
+                                                    | what have you experienced?
+                                                    br
+                                                    | Changing markets: political effect on housing
+                                                    br
+                                                    | Purchases vs. refinances
+                                                    br
+                                                    | Educating buyers and setting expectations
+                                                    br
+                                                    | Managing timing issues
+                                                    br
+                                                    | Realtor expectation and communications
+                                                    br
+                                                    | Turning customer service upside-down
+                                        .panel.panel-default
+                                            #headingEight.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseEight', aria-expanded='false', aria-controls='collapseEight')
+                                                        | Session 8: Managing and Marketing Your Pipeline
+                                            #collapseEight.panel-collapse.collapse
+                                                .panel-body
+                                                    | Fair communications
+                                                    br
+                                                    | Managing your pipeline
+                                                    br
+                                                    | Marketing within your pipeline
+                                                    br
+                                                    | Social media
+                                                    br
+                                                    | Creating purchase business
+                                                    br
+                                                    | The power of teaching real estate finance – continuing education
+                                        .panel.panel-default
+                                            #headingNine.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseNine', aria-expanded='false', aria-controls='collapseNine')
+                                                        | Wrap Up Q&A
+                                        .panel.panel-default
+                                            #headingTen.panel-heading
+                                                h4.panel-title
+                                                    a.collapsed(data-toggle='collapse', data-parent='#accordion2', href='#collapseTen', aria-expanded='false', aria-controls='collapseTen')
+                                                        | Final Exam
+                            #docs.tab-pane.fade.in.active
+                                .des-text
+
+    // product details area end
+
+    section.cart-page.section-padding
         .container
             .section-title.text-center
                 h3
@@ -80,7 +340,7 @@ block content
                                 .append(claz.classSize).append("/").append(claz.registered)
                             )
                             .append($('<td>')
-                                .append(claz.fee)
+                                .append("$ ").append(claz.fee)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='unRegisterCourse(" + claz.studentClassCode + ")'> Un Register </button>")
@@ -107,7 +367,7 @@ block content
                                 .append(claz.registered || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append(claz.fee)
+                                .append("$ ").append(claz.fee)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")
@@ -136,7 +396,7 @@ block content
                                 .append(claz.registered || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append(claz.fee)
+                                .append("$ ").append(claz.fee)
                             )
                             .append($('<td>')
                                 .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")

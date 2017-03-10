@@ -48,6 +48,10 @@ block content
 
 block script
     style.
+        #table thead tr th {
+            text-align: left;
+
+        }
         #class-manager {
             margin-top: 150px;
         }
@@ -65,7 +69,6 @@ block script
         }
     script.
         function removeClass(code) {
-            alert(code);
             $.post('/removeClass', {
                 code: code
             }, function (res, err) {
