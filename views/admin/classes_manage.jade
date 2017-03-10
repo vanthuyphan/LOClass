@@ -18,6 +18,7 @@ block content
                                     th Fee
                                     th Address
                                     th Students
+                                    th Email
                             tbody
                                 each claz, index in classes || []
                                     tr(class=(i % 2 == 0) ? 'odd' : 'even')
@@ -27,7 +28,9 @@ block content
                                         td $ #{claz.fee}
                                         td #{claz.address}
                                         td
-                                            button.btn.btn-small.btn-blue(onclick='viewStudent(' + claz.code + ')')  VIEW
+                                            button.btn.btn-small.btn-blue(onclick='viewStudent(' + claz.code + ')')  View
+                                        td
+                                            button.btn.btn-small.btn-blue(onclick='sendEmail(' + claz.code + ')')  Email
 
     section#students.cart-page.section-padding
         .container
