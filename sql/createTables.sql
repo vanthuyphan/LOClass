@@ -38,15 +38,7 @@ CREATE TABLE IF NOT EXISTS `Class` (
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `ClassTime` (
-	`code` BIGINT NOT NULL AUTO_INCREMENT,
-	`classCode` BIGINT,
-	`startTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`endTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`code`),
-	FOREIGN KEY (classCode) REFERENCES Class(code)
-) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-
+DROP TABLE `StudentClass`;
 CREATE TABLE IF NOT EXISTS `StudentClass` (
 	`code` BIGINT NOT NULL AUTO_INCREMENT,
 	`classCode` BIGINT,
@@ -56,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `StudentClass` (
 	FOREIGN KEY (userCode) REFERENCES User(code)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-INSERT INTO `User` VALUES (1, 'v4n', 'van@gmail.com', 'Van Phan', 'pppppp', '', 0);
-INSERT INTO `User` VALUES (2, 'v5n', 'van1@gmail.com', 'Phan', 'pppppp', '', 0);
-INSERT INTO `User` VALUES (3, 'v6n', 'van2@gmail.com', 'Van Phan', 'pppppp', '', 0);
-INSERT INTO `User` VALUES (4, 'admin', 'admin@gmail.com', 'Admin', 'pppppp', '', 1);
+INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);
+
+INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van2@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);
