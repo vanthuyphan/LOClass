@@ -318,6 +318,7 @@ block content
                 })
                 $('#myClasses').find('tbody').empty();
                 $.each(myClasses, function (index, claz) {
+                    var combo = claz.code + "," + claz.studentClassCode;
                     $('#myClasses').find('tbody')
                         .append($('<tr>')
                             .append($('<td>').css('display', 'none')
@@ -336,7 +337,7 @@ block content
                                 .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='unRegisterCourse(" + claz + ")'> Un Register </button>")
+                                .append("<button class='submit-text' onclick='unRegisterCourse(" + combo + ")'> Un Register </button>")
                             )
                         )
                 });
@@ -405,10 +406,12 @@ block content
                 }
             }
 
-            function unRegisterCourse(claz) {
+            function unRegisterCourse(code, studentClassCode) {
+                alert("ccc" + code)
+                alert("ccc" + studentClassCode)
                 $.post('unRegisterClass', {
-                    code: claz.studentClassCode,
-                    classCode: claz.code
+                    code: studentClassCode,
+                    classCode: code
                 }, function (res, err) {
                     location.reload();
                 })
