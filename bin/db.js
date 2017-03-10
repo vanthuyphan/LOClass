@@ -162,7 +162,7 @@ db.registerClass = function (model, cb) {
         model.userCode,
         model.classCode
     ], function(err, result) {
-        now.mysql.query("UPDATE `Class` SET registed = registed + 1 WHERE code = ?", [model.classCode], function(err, result) {
+        now.mysql.query("UPDATE `Class` SET registed = registed + 1 WHERE code = ?;", [model.classCode], function(err, result) {
             cb(err);
         });
     });

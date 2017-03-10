@@ -336,7 +336,7 @@ block content
                                 .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='unRegisterCourse(" + claz.studentClassCode + ")'> Un Register </button>")
+                                .append("<button class='submit-text' onclick='unRegisterCourse(" + claz + ")'> Un Register </button>")
                             )
                         )
                 });
@@ -405,9 +405,10 @@ block content
                 }
             }
 
-            function unRegisterCourse(studentClassCode) {
+            function unRegisterCourse(claz) {
                 $.post('unRegisterClass', {
-                    code: studentClassCode
+                    code: claz.studentClassCode,
+                    classCode: claz.code
                 }, function (res, err) {
                     location.reload();
                 })
