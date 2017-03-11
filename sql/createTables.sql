@@ -1,4 +1,4 @@
-create database time_table;
+create database IF NOT EXISTS time_table;
 use time_table;
 CREATE TABLE IF NOT EXISTS `_SessionSqlStore` (
 	`id` VARCHAR(300) NOT NULL PRIMARY KEY,
