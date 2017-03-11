@@ -58,6 +58,9 @@ a {
 	text-transform:uppercase;
 	font-family: 'Montserrat', sans-serif;
 }
+
+.required:after { content:" *"; }
+
 a:hover,a:hover, a:focus {
 	color: #fe5858;
 	text-decoration: none;

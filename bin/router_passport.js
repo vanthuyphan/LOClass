@@ -43,7 +43,6 @@ function setupRegister() {
         if (!input.first_name || !input.email || !input.password) {
             req.body.registerMess = "NOT ENOUGH INFORMATION";
             res.render("login", req.body);
-            return;
         }
 
         if (req.user && req.user.oauth)  {
@@ -70,8 +69,7 @@ function setupRegister() {
                         res.render("error");
                         throw err;
                     } else {
-                        res.render("info", {"message": "Your account is verified. Please login"});
-                        res.render("login", req.body);
+                        res.render("info", {"message": "Please check your email box for further instruction"});
                     }
                 })
                 return;

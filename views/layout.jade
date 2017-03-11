@@ -61,9 +61,14 @@ html.no-js(lang='en')
                                             a(href='/about') About
                                         if (user && user.code && user.isAdmin)
                                             li
-                                                a(href='/addClasses') Manage Classes
-                                            li
-                                                a(href='/students') Manage Students
+                                                a(href='/') Admin
+                                                ul
+                                                    li
+                                                        a(href='/addClasses') Manage Classes
+                                                    li
+                                                        a(href='/students') Manage Students
+                                                    li
+                                                        a(href='/email_history') Email History
                                         if (user && user.code)
                                             li
                                                 a(href='/account') My Account
@@ -168,5 +173,7 @@ html.no-js(lang='en')
         // main js
         script(src='/public/js/main.js')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.0/jquery-confirm.min.js')
+        script(type='text/javascript', src='/bower_components/vanilla-masker/build/vanilla-masker.min.js')
+        script(type='text/javascript', src='/public/js/masker.js')
 
         block script

@@ -17,12 +17,13 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`password` VARCHAR(20),
 	`phone` VARCHAR(20),
 	`street` VARCHAR(100),
-	`zipcode` VARCHAR(10),
-	`hasLOLicense` SMALLINT,
-	`hasRELicense` SMALLINT,
+	`zip` VARCHAR(10),
+	`LONumber` VARCHAR(30),
+	`RENumber` VARCHAR(30),
 	`verified` SMALLINT,
 	`subscribe` SMALLINT,
 	`isAdmin` SMALLINT,
+	`note` VARCHAR(1000),
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -46,6 +47,17 @@ CREATE TABLE IF NOT EXISTS `StudentClass` (
 	PRIMARY KEY (`code`),
 	FOREIGN KEY (classCode) REFERENCES Class(code),
 	FOREIGN KEY (userCode) REFERENCES User(code)
+) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+DROP TABLE `EmailHistory`;
+CREATE TABLE IF NOT EXISTS `EmailHistory` (
+	`code` BIGINT NOT NULL AUTO_INCREMENT,
+	`created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`to` NVARCHAR(500),
+	`from` NVARCHAR(500),
+	`subject` NVARCHAR(500),
+	`content` NVARCHAR(4000),
+	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);

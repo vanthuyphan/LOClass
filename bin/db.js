@@ -46,13 +46,43 @@ db.verifyUser = function(code, cb) {
 
 db.insertUser = function(model, cb) {
     console.log("INSERTING")
-    now.mysql.query("INSERT INTO User(email, first_name, last_name, subscribe, phone, password) VALUES(?, ?, ?, ?, ?, ?);", [
+    now.mysql.query("INSERT INTO User(email, first_name, last_name, subscribe, phone, password, middle_name, street, zip, RENumber, LONumber) VALUES(?, ?, ?, ?, ?, ?);", [
         model.email,
         model.first_name,
         model.last_name,
         model.subscribe,
         model.phone,
         model.password,
+        model.middle_name,
+        model.street,
+        model.zip,
+        model.RENumber,
+        model.LONumber
+    ], function(err, result) {
+        if (err) {
+            console.log(err)
+        }
+        if (result) {
+            model.code = result.insertId;
+        }
+        cb(err, model);
+    });
+};
+
+db.updateUser = function(userCode, model, cb) {
+    now.mysql.query("UPDATE `User` SET email=?, first_name=?, last_name=?, " +
+        "subscribe=?, phone=?, middle_name=?, street=?, zip=?, RENumber=?, LONumber=? WHERE code=?;", [
+        model.email,
+        model.first_name,
+        model.last_name,
+        model.subscribe,
+        model.phone,
+        model.middle_name,
+        model.street,
+        model.zip,
+        model.RENumber,
+        model.LONumber,
+        userCode
     ], function(err, result) {
         if (err) {
             console.log(err)
@@ -127,6 +157,26 @@ db.getStudents = function(classCode, cb) {
     });
 };
 
+db.getEmail = function(code, cb) {
+    now.mysql.query("SELECT * FROM `EmailHistory` WHERE code = ?;", [code], function(err, rows) {
+        if (rows) {
+            var row = rows[0];
+            if (row.content) {
+                row.content = new Buffer(row.content, 'base64').toString('ascii');
+            }
+            cb(err, row);
+        } else {
+            cb(err);
+        }
+    });
+};
+
+db.saveNote = function(model, cb) {
+    now.mysql.query("UPDATE `USER` SET note = ? WHERE code = ?;", [model.note, model.studentCode], function(err, rows) {
+        cb(err);
+    });
+};
+
 
 db.removeStudent = function(model, cb) {
     now.mysql.query("DELETE FROM `StudentClass` WHERE userCode = ? AND classCode =?", [model.studentCode, model.classCode], function(err, rows) {
@@ -184,3 +234,18 @@ db.unregisterClass = function (model, cb) {
         });
     });
 }
+
+db.createEmailHistory = function(model, cb) {
+    console.log(model);
+    now.mysql.query("INSERT INTO EmailHistory(`from`, `to`, `subject`, `content`) VALUES(?, ?, ?, ?);", [model.from, model.to, model.subject, new Buffer(model.html).toString('base64')], function(err, result) {
+        cb(err);
+    });
+};
+
+db.getEmailHistories = function(cb) {
+    now.mysql.query("SELECT * FROM `EmailHistory` ;", function(err, result) {
+        cb(err, result);
+    });
+};
+ 
+

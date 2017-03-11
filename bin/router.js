@@ -89,6 +89,13 @@ router.post("/removeStudent", function (req, res) {
     })
 });
 
+router.post("/get_user", function(req, res) {
+    db.getUserByCode(req.body.code, function(err, user) {
+        console.log(user)
+        res.send({user: user});
+    });
+});
+
 router.get("/students", function(req, res) {
     db.getClasses(function(err, classes) {
         res.render("admin/classes_manage", {classes: classes});
@@ -96,9 +103,8 @@ router.get("/students", function(req, res) {
 
 });
 
-router.post("/getStudents", function(req, res) {
+router.post("/get_students", function(req, res) {
     db.getStudents(req.body.classCode, function(err, students) {
-        console.log(students);
         res.send({students: students});
     });
 });
@@ -150,6 +156,13 @@ router.get("/getClasses", function(req, res) {
     });
 });
 
+router.get("/email_history", function(req, res) {
+    db.getEmailHistories(function(err, rows) {
+        if (err) throw err;
+        res.render("admin/email_history", {histories: rows});
+    });
+});
+
 router.post("/updateClass", function(req, res) {
     db.updateClass(req.body, function(err, rows) {
         if (err) throw err
@@ -158,11 +171,35 @@ router.post("/updateClass", function(req, res) {
     });
 });
 
-router.post("/saveCourses", function(req, res) {
-    var courses = req.body.userCourses;
-    db.saveUserCourses(req.user.code, courses, function(err) {
+router.post("/get_email", function(req, res) {
+    db.getEmail(req.body.code, function(err, email) {
         if (err) throw err;
+        res.send({email: email});
+        return;
+    });
+});
+
+router.post("/save_note", function(req, res) {
+    db.saveNote(req.body, function(err) {
+        if (err) throw err;
+        console.log("Done")
         res.send({info: "saved"});
+        return;
+    });
+});
+
+router.post("/email_students", function(req, res) {
+    db.getStudents(req.body.classCode, function(err, students) {
+        now.mailer.sendToMany(students, req.body, function (err) {
+            res.send({info: "Send"});
+        });
+    });
+});
+
+router.post("/update_user", function(req, res) {
+    db.updateUser(req.user.code, req.body, function(err) {
+        if (err) throw err;
+        res.redirect('/logout');
         return;
     });
 });

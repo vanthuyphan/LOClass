@@ -36,7 +36,7 @@ block content
                                         td
                                             button.btn.btn-small.btn-blue(onclick='viewStudent(' + claz.code + ')')  View
                                         td
-                                            button.btn.btn-small.btn-blue(onclick='sendEmail(' + claz.code + ')')  Email
+                                            button.btn.btn-small.btn-blue(onclick='displayEmailPopup(' + claz.code + ')')  Email
 
     section#students.cart-page.section-padding
         .container
@@ -56,6 +56,42 @@ block content
                                     th Note
                                     th Remove
                             tbody
+    section.cart-page.section-padding
+        #emailModal.modal.fade(role='dialog')
+            .modal-dialog
+                // Modal content
+                .modal-content
+                    .modal-body
+                        .modalErr
+                        form#register_form(action='/email_students', method='post')
+                            .input-text
+                                input#classCode(type='text', name='classCode', style='display:none')
+                            label Subject:
+                            .input-text
+                                input#subject(type='text', name='subject', required)
+                            label Message:
+                            .input-text
+                                textarea#message(type='text', name='message', rows="4", cols="50")
+                            .submit-text
+                                input#submitButton(type='button', class='btn btn-small btn-blue', value='Send', onclick="sendEmails()")
+
+
+    section.cart-page.section-padding
+        #notePopup.modal.fade(role='dialog')
+            .modal-dialog
+                // Modal content
+                .modal-content
+                    .modal-body
+                        form
+                            .input-text
+                                input#studentCode(type='text', name='studentCode', style='display:none')
+                            label Note:
+                            .input-text
+                                textarea#noteArea(type='text', name='note', rows="4", cols="50")
+                            .input-text
+                                .submit-text
+                                    input(type='button', value='Update', class='btn btn-small btn-blue', onclick="saveNote()")
+
 block script
     style.
         #classes {
@@ -64,9 +100,13 @@ block script
 
     script.
         var savedClassCode = '';
+
         function viewStudent(classCode) {
+            $('html, body').animate({
+                scrollTop: $("#students").offset().top
+            }, 1000);
             savedClassCode = classCode;
-            $.post('/getStudents', {classCode: classCode}, function (res, err) {
+            $.post('/get_students', {classCode: classCode}, function (res, err) {
                 var students = res.students;
                 $('#studentsTable').find('tbody').empty();
                 $.each(students, function (index, student) {
@@ -88,10 +128,10 @@ block script
                                 .append(student.phone)
                             )
                             .append($('<td>')
-                                .append(student.note)
+                                .append("<button class='btn btn-small btn-blue', onclick='showNotePopup(" +  student.code + ")'>  Note </button>")
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='removeStudent(" + student.code + ")'> Remove </button>")
+                                .append("<button class='btn btn-small btn-blue', onclick='removeStudent(" + student.code + ")'> Remove </button>")
                             )
                         )
                 });
@@ -99,8 +139,51 @@ block script
         }
 
         function removeStudent(studentCode) {
-            alert(studentCode)
             $.post('/removeStudent', {classCode: savedClassCode, studentCode: studentCode}, function (err, res) {
                 location.reload();
             });
+        }
+
+        function showNotePopup(studentCode) {
+            $.post('get_user', {code: studentCode}, function (res, err) {
+                $('#notePopup').modal("show");
+                $('#noteArea').text(res.user.note);
+                $('#studentCode').val(res.user.code);
+            })
+        }
+
+        function saveNote() {
+            var note = $('#noteArea').val();
+            var studentCode = $('#studentCode').val();
+            $.post('save_note', {studentCode: studentCode, note: note}, function (res, err) {
+                $.alert({
+                    title: "INFO",
+                    content: "Saved"
+                })
+                $('#notePopup').modal("hide");
+                location.reload();
+            });
+        }
+
+        function displayEmailPopup(clazCode) {
+            $("#emailModal").modal("show");
+            $("#classCode").val(clazCode);
+        }
+
+        function sendEmails() {
+            var subject = $("#subject").val();
+            var clazCode = $("#classCode").val();
+            var message = $("#message").val();
+            if (subject && message) {
+                $("#emailModal").modal("hide");
+                $.post('email_students', {classCode: clazCode, subject: subject, message: message}, function (res, ee) {
+                    $.alert({
+                        title: "INFO",
+                        content: "Saved"
+                    })
+                })
+            } else {
+                $(".modalErr").text("Please put in subject and message");
+            }
+
         }

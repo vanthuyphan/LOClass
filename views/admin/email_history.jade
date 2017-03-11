@@ -1,0 +1,54 @@
+extends ../layout.jade
+block content
+    .container#email-histories
+        .row
+            .col-xs-12.col-md-6.col-text-center
+                .section-title.about-title.text-center
+                    h3 Email History
+                    .shape
+                        img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+        .err=msg
+        section#class_table
+            table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
+                thead
+                    tr
+                        th Created
+                        th From
+                        th To
+                        th Subject
+                        th Content
+                tbody
+                    each history, index in histories || []
+                        tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td #{history.created}
+                            td #{history.from}
+                            td #{history.to}
+                            td #{history.subject}
+                            td
+                                button.btn.btn-small.btn-blue(onclick='viewEmail(' + history.code + ')')  Content
+
+
+block script
+    style.
+        #table thead tr th {
+            text-align: left;
+
+        }
+        #email-histories{
+            margin-top: 150px;
+        }
+    script.
+        function viewEmail(code) {
+            $.post('get_email', {code: code}, function (res, err) {
+                var content = ' ';
+                if (res.email && res.email.content) {
+                    content = res.email.content;
+                }
+                $.alert({
+                    title: "Content",
+                    content: res.email.content
+                });
+            })
+        }
+
+

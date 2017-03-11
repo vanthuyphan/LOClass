@@ -10,7 +10,18 @@ exports.init = function (_now, cb) {
     cb();
 }
 
-mailer.sendMail = function (data ,template, cb) {
+mailer.sendToMany = function (students, data, cb) {
+    var template = 'general';
+    console.log(students.length)
+    var to = '';
+    for (var i = 0; i < students.length; i++) {
+        to += students[i].email + ";";
+    }
+    data.to = to;
+    sendEmail(data, template, cb);
+}
+
+function sendEmail(data, template, cb) {
     var template = process.cwd() + '/views/email-templates/' + template + '.jade';
     fs.readFile(template, 'utf8', function(err, file){
         if(err){
@@ -21,13 +32,13 @@ mailer.sendMail = function (data ,template, cb) {
             data.baseUrl = now.ini.web.url;
             var compiledTmpl = jade.compile(file, {filename: template});
             var html = compiledTmpl(data);
-
-            var mail = mailcomposer({
+            var email = {
                 from: now.ini.mailgun.user,
                 to: data.to || data.email,
                 subject: data.subject,
                 html: html
-            });
+            };
+            var mail = mailcomposer(email);
 
             mail.build(function(mailBuildError, message) {
 
@@ -37,13 +48,25 @@ mailer.sendMail = function (data ,template, cb) {
                 };
 
                 mailgun.messages().sendMime(dataToSend, function (sendError, body) {
-                    console.log(body);
-                    cb(sendError);
+                    console.log(sendError);
+                    if (!sendError) {
+                        now.db.createEmailHistory(email, function (err) {
+                            console.log("Created History")
+                            cb(err);
+                        });
+                    } else {
+                        cb(sendError);
+                    }
                 });
             });
 
         }
     });
+}
+
+mailer.sendMail = function (data ,template, cb) {
+    console.log("Sending");
+    sendEmail(data, template, cb);
 }
 
 mailer.createMailingList = function (data, cb) {
@@ -89,5 +112,6 @@ mailer.deleteMember = function (data, cb) {
         cb(err);
     });
 }
+
 
 

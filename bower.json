@@ -24,6 +24,7 @@
     "components-font-awesome": "^4.6.1",
     "timetable.js": "timetable#^0.6.2",
     "jquery-confirm2": "craftpip/jquery-confirm#^3.1.0",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "vanilla-masker": "^1.1.1"
   }
 }
