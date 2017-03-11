@@ -109,6 +109,14 @@ db.getClasses = function(cb) {
     });
 };
 
+db.updateClass = function(model, cb) {
+    now.mysql.query("UPDATE `Class` SET location = ?, datetime=?, fee=?, address=?, classSize=?, registed=? WHERE code = ?;",
+        [model.editLocation, model.editDatetime, model.editFee, model.editAddress, model.editClassSize, model.editRegisted, model.editCode]
+        , function(err, rows) {
+        cb(err);
+    });
+};
+
 db.getStudents = function(classCode, cb) {
     now.mysql.query("SELECT User.code, first_name, last_name, phone, email, note FROM `User` JOIN StudentClass ON StudentClass.userCode =  User.code WHERE StudentClass.`classCode` = ?;", [classCode], function(err, rows) {
         if (rows) {
@@ -122,7 +130,9 @@ db.getStudents = function(classCode, cb) {
 
 db.removeStudent = function(model, cb) {
     now.mysql.query("DELETE FROM `StudentClass` WHERE userCode = ? AND classCode =?", [model.studentCode, model.classCode], function(err, rows) {
-        cb(err);
+        now.mysql.query("UPDATE `Class` SET registed = registed - 1 WHERE code = ?;", [model.classCode], function(err, result) {
+            cb(err);
+        });
     });
 };
 
@@ -151,7 +161,6 @@ db.saveClass = function (model, cb) {
 }
 
 db.removeClass = function (code, cb) {
-    console.log("Code is" + code)
     now.mysql.query("DELETE FROM `Class` WHERE code = ?", [code], function(err, result) {
         cb(err);
     });

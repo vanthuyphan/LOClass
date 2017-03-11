@@ -150,6 +150,14 @@ router.get("/getClasses", function(req, res) {
     });
 });
 
+router.post("/updateClass", function(req, res) {
+    db.updateClass(req.body, function(err, rows) {
+        if (err) throw err
+        res.redirect('addClasses')
+        return;
+    });
+});
+
 router.post("/saveCourses", function(req, res) {
     var courses = req.body.userCourses;
     db.saveUserCourses(req.user.code, courses, function(err) {

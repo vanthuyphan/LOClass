@@ -13,6 +13,8 @@ html.no-js(lang='en')
         // all css here
         // style css
         link(rel='stylesheet', href='/public/style.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.0/jquery-confirm.min.css')
+
         // modernizr js
         script(src='/public/js/vendor/modernizr-2.8.3.min.js')
         script(src='/public/js/vendor/jquery-1.12.3.min.js')
@@ -54,12 +56,12 @@ html.no-js(lang='en')
                                         li
                                             a(href='/') Home
                                         li
-                                            a(href='/classes') Course
+                                            a(href='/classes') Classes
                                         li
                                             a(href='/about') About
                                         if (user && user.code && user.isAdmin)
                                             li
-                                                a(href='/addClasses') Manage Course
+                                                a(href='/addClasses') Manage Classes
                                             li
                                                 a(href='/students') Manage Students
                                         if (user && user.code)
@@ -165,4 +167,6 @@ html.no-js(lang='en')
         script(src='/public/js/map-script.js')
         // main js
         script(src='/public/js/main.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.0/jquery-confirm.min.js')
+
         block script

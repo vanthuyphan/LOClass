@@ -1,7 +1,41 @@
 extends ../layout.jade
 block content
     .container#class-manager
+        .row
+            .col-xs-12.col-md-6.col-text-center
+                .section-title.about-title.text-center
+                    h3 Manage Classes
+                    .shape
+                        img(src='/public/img/icon/t-shape.png', alt='Title Shape')
         .err=msg
+        section#class_table
+            h3 Classes
+            table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
+                thead
+                    tr
+                        th Edit
+                        th Location
+                        th Date/Time
+                        th Class Size
+                        th Fee
+                        th Address
+                        th Remove
+                tbody
+                    each claz, index in classes || []
+                        - var combo = claz.code + "," + "'" + claz.location + "'" + "," +  "'" +claz.datetime + "'" + "," + claz.classSize + "," + claz.fee + "," + "'" +claz.address + "'" + "," + claz.registed ;
+                        tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td
+                                button.btn.btn-small.btn-blue(onclick='editRow(' + combo + ')')  Edit
+                            td #{claz.location}
+                            td #{claz.datetime}
+                            td #{claz.registed} / #{claz.classSize}
+                            td #{claz.fee}
+                            td #{claz.address}
+                            td
+                                button.btn.btn-small.btn-blue(onclick='removeClass(' + claz.code + ')')  Remove
+                button#add-class-form-btn.btn.btn-blue(type='button', onclick='addRow()') + Row
+
+
         section#add_form
             form#addClassForm(action='/addClass', method='post', autocomplete="on")
                 h3 Add Class
@@ -20,31 +54,34 @@ block content
                 .form-group
                     label(for='address') Address
                     input#address.form-control(name='address', required)
-                .row
-                    button#add-course-btn.btn.btn-blue(type='submit', onclick='addClass()') Add
+                .form-group
+                    button#add-class-btn.btn.btn-blue(type='submit') Save
 
-        section#class_table
-            h3 Classes
-            table#table.table.table-hover.dt-responsive.nowrap(style='width: 100%')
-                thead
-                    tr
-                        th Location
-                        th Date/Time
-                        th Class Size
-                        th Fee
-                        th Address
-                        th Remove
-                tbody
-                    each claz, index in classes || []
-                        tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                            td #{claz.location}
-                            td #{claz.datetime}
-                            td #{claz.classSize}
-                            td #{claz.fee}
-                            td #{claz.address}
-                            td
-                                button.btn.btn-small.btn-blue(onclick='removeClass(' + claz.code + ')')  Remove
-
+        section#edit_form
+            form(action='/updateClass', method='post', autocomplete="on")
+                h3 Edit Class
+                .form-group
+                    input#editCode.form-control(type='hidden',name='editCode', required)
+                .form-group
+                    label(for='editLocation') Location
+                    input#editLocation.form-control(name='editLocation', required)
+                .form-group
+                    label(for='editDatetime') Date/Time
+                    input#editDatetime.form-control(name='editDatetime', required)
+                .form-group
+                    label(for='editClassSize') Class Size
+                    input#editClassSize.form-control(name='editClassSize', required)
+                .form-group
+                    label(for='editRegisted') Registered
+                    input#editRegisted.form-control(name='editRegisted', required)
+                .form-group
+                    label(for='editFee') Fee
+                    input#editFee.form-control(name='editFee', required)
+                .form-group
+                    label(for='address') Address
+                    input#editAddress.form-control(name='editAddress', required)
+                .form-group
+                    button#edit-class-btn.btn.btn-blue(type='submit') Update
 
 block script
     style.
@@ -52,8 +89,9 @@ block script
             text-align: left;
 
         }
+
         #class-manager {
-            margin-top: 150px;
+            margin-top: 250px;
         }
 
         .btn {
@@ -68,10 +106,46 @@ block script
             margin-top: 50px;
         }
     script.
+        $("#edit_form").hide();
+
         function removeClass(code) {
-            $.post('/removeClass', {
-                code: code
-            }, function (res, err) {
-                location.reload();
-            })
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure you want to delete this class?',
+                buttons: {
+                    confirm: function () {
+                        $.post('/removeClass', {
+                            code: code
+                        }, function (res, err) {
+                            location.reload();
+                        })
+                    },
+                    cancel: function () {
+                    },
+                }
+            });
         }
+
+        function addRow() {
+            $("#add_form").show();
+            $("#edit_form").hide();
+            $('html, body').animate({
+                scrollTop: $("#add_form").offset().top
+            }, 1000);
+        }
+
+        function editRow(code, location, datetime, classSize, fee, address, registed) {
+            $("#add_form").hide();
+            $("#edit_form").show();
+            $("#editCode").val(code);
+            $("#editLocation").val(location);
+            $("#editDatetime").val(datetime);
+            $("#editClassSize").val(classSize);
+            $("#editFee").val(fee);
+            $("#editAddress").val(address);
+            $("#editRegisted").val(registed);
+            $('html, body').animate({
+                scrollTop: $("#edit_form").offset().top
+            }, 1000);
+        }
+
