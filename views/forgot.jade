@@ -4,6 +4,12 @@ block content
         #{forgotMess}
         .container
             .row
+                .col-xs-12.col-md-6.col-text-center
+                    .section-title.about-title.text-center
+                        h3 Reset Password
+                        .shape
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+            .row
                 .col-sm-6
                     .row
                         .single-check
@@ -17,7 +23,7 @@ block content
                                         .input-text
                                             input(type='text', name='email' value=email || '')
                                         .submit-text
-                                            input(type='submit', name='submit', value='Send Restore Email')
+                                            input(type='submit', name='submit', value='Reset Password')
 
     block script
         style.

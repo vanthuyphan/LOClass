@@ -7,7 +7,7 @@ block content
                     .section-title.about-title.text-center
                         h3 Class Details
                         .shape
-                            img(src='/pubic/img/icon/t-shape.png', alt='Title Shape')
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
             .row
                 .col-xs-12
                     .pro-des-tab
@@ -281,7 +281,7 @@ block content
                                     th Address
                                     th Date/Time
                                     th Class Size
-                                    th Register
+                                    th Enroll
                             tbody
 
     section#myClasses.cart-page.section-padding
@@ -300,7 +300,7 @@ block content
                                     th Address
                                     th Date/Time
                                     th Class Size
-                                    th UnRegister
+                                    th Withdraw
                             tbody
 
     block script
@@ -342,12 +342,16 @@ block content
                                 .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='unRegisterCourse(" + combo + ")'> Un Register </button>")
+                                .append("<button class='btn submit-text' onclick='unRegisterCourse(" + combo + ")'> Withdraw </button>")
                             )
                         )
                 });
                 $('#class').find('tbody').empty();
                 $.each(remainingClasses, function (index, claz) {
+                    var enrollButton = "";
+                    if (claz.registed < claz.classSize) {
+                        enrollButton = "<button class='btn submit-text' onclick='registerCourse(" + claz.code + ")'> Enroll </button>"
+                    }
                     $('#class').find('tbody')
                         .append($('<tr>')
                             .append($('<td>').css('display', 'none')
@@ -366,7 +370,7 @@ block content
                                 .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")
+                                .append(enrollButton)
                             )
                         )
                 })
@@ -374,6 +378,10 @@ block content
                 $('#myClasses').hide();
                 $('#class').find('tbody').empty();
                 $.each(classes, function (index, claz) {
+                    var enrollButton = "";
+                    if (claz.registed < claz.classSize) {
+                        enrollButton = "<button class='btn submit-text' onclick='registerCourse(" + claz.code + ")'> Enroll </button>"
+                    }
                     $('#class').find('tbody')
                         .append($('<tr>')
                             .append($('<td>').css('display', 'none')
@@ -392,7 +400,7 @@ block content
                                 .append(claz.registed || 0).append("/").append(claz.classSize)
                             )
                             .append($('<td>')
-                                .append("<button class='submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>")
+                                .append(enrollButton)
                             )
                         )
                 })
