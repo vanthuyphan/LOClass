@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `EmailHistory` (
 INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);
 
 INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van2@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);
+INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("thuan@loanfactory.com", 'Thuan', "Nguyen", 0, '122', 'Himark101', 1, 1);
 
 INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'April 1, 2017 Mar 6-9 9AM-2PM PST', 0);
 INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Orange County Office", '9523 Bolsa Ave., Westminster, CA 92683', 200, 10, 'April 22, 2017', 0);
