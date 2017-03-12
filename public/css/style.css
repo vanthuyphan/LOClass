@@ -59,6 +59,10 @@ a {
 	font-family: 'Montserrat', sans-serif;
 }
 
+.err {
+    color: #fe5858!important;
+}
+
 .required:after { content:" *"; }
 
 a:hover,a:hover, a:focus {

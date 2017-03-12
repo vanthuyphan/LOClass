@@ -49,7 +49,7 @@ function setupRegister() {
         var input = req.body;
 
         if (!input.first_name || !input.last_name || !input.email || !input.password) {
-            req.body.registerMess = "NOT ENOUGH INFORMATION";
+            req.body.registerMess = "Please fill in all the information";
             res.render("signup", req.body);
         }
 
@@ -61,7 +61,7 @@ function setupRegister() {
         db.insertUser(req.body, function (err, row) {
             if (err) {
                 if (err.code === 'ER_DUP_ENTRY') {
-                    req.body.registerMess = "EMAIL IS ALREADY IN THE SYSTEM";
+                    req.body.registerMess = "There is already an account with this email address. Please login";
                     res.render("signup", req.body);
                     return;
                 }
@@ -78,13 +78,13 @@ function setupRegister() {
                         row.datetime = claz.datetime;
                         row.url = now.ini.web.url + '/view_class?code=' + crypto.encrypt(row.code.toString()) + '&classCode=' + claz.code;
                         row.url = encodeURI(row.url);
-                        res.render("info", {"message": "Please check your email box for further instruction"});
+                        res.render("info", {"message": "Please check your mailbox for further instruction"});
                         now.mailer.sendMail(row, "class_registration", function (err) {
                             if (err) {
                                 res.render("error");
                                 throw err;
                             } else {
-                                res.render("info", {"message": "Please check your email box for further instruction"});
+                                res.render("info", {"message": "Please check your mailbox for further instruction"});
                             }
                         })
                     })
@@ -97,7 +97,7 @@ function setupRegister() {
                             res.render("error");
                             throw err;
                         } else {
-                            res.render("info", {"message": "Please check your email box for further instruction"});
+                            res.render("info", {"message": "Please check your mailbox for further instruction"});
                         }
                     })
                 }
@@ -197,9 +197,7 @@ function setupRegister() {
                             res.render("error");
                             throw err;
                         } else {
-                            req.body.msg = "Please check your mailbox for further instruction";
-                            res.render("forgot", req.body);
-                            return;
+                            res.render("info", {message: "Please check your mailbox for further instruction"});
                         }
                     })
                 }

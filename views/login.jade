@@ -7,12 +7,12 @@ block content
                     .row
                         .single-check
                             form(action='/login', method='post')
-                                p #{loginMess}
                                 .single-input.p-bottom50.clearfix
+
                                     .col-xs-12
                                         .check-title
                                             h3 Login
-
+                                            p.err #{loginMess}
                                     .col-xs-12
                                         label Email:
                                         .input-text

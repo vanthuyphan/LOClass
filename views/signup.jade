@@ -23,7 +23,7 @@ block content
                 .col-sm-12
                     .single-input.p-bottom50.clearfix
                         form#register_form(action='/register', method='post')
-                            p #{registerMess}
+                            p.err #{registerMess}
                                 .row
                                     if (claz)
                                         input#classCode(type='text', value=claz.code || '', name='classCode', style='display: none')
