@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var router_passport = require("./router_passport.js");
+var crypto = require("./crypto.js");
 
 var now, db;
 
@@ -31,6 +32,7 @@ router.post("/sendMessage", function(req, res) {
     var input = req.body;
     input.subject = "Client Query" + input.subject;
     input.to = now.ini.gmail.user;
+    input.name = 'Thuan',
     now.mailer.sendMail(input, "clientQuery", function(err) {
         if (err) throw err;
         res.render("info", { "message": "Thank you. Got the message. Get back to you soon" });
@@ -63,11 +65,14 @@ router.get("/account", function(req, res) {
 
 router.get("/classes", function(req, res) {
     if (req.user && req.user.code) {
+        console.log("With uer");
         db.getClassesWithUser(req.user.code, function (err, classes) {
             if (err) throw err;
+            console.log(classes);
             res.render("classes", {classes: classes});
         })
     } else {
+        console.log("WithOUT uer");
         db.getClasses(function(err, classes) {
             res.render("classes", {classes: classes});
         });
@@ -203,6 +208,28 @@ router.post("/update_user", function(req, res) {
         return;
     });
 });
+
+router.get('/view_class', function (req, res) {
+    var code = crypto.decrypt(req.query.code);
+    db.verifyUser(code, function(err) {
+        if (err) {
+            throw err;
+        } else {
+            var model = {};
+            model.classCode = req.query.classCode;
+            model.userCode = code;
+            db.registerClass(model, function (error) {
+                if (error) throw err;
+                if (req.user && req.user.code) {
+                    res.redirect('/classes');
+                    return;
+                } else {
+                    res.render('login', {info: "You have successfully registered your class. Please login to view it"});
+                }
+            })
+        }
+    })
+})
 
 router.get("/**", function(req, res) {
     db.getClasses(function(err, classes) {

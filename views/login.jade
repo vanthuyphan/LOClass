@@ -3,7 +3,7 @@ block content
     section#login.login-page.section-padding
         .container
             .row
-                .col-sm-6
+                .col-sm-12
                     .row
                         .single-check
                             form(action='/login', method='post')
@@ -23,66 +23,10 @@ block content
                                             input(type='password', name='password')
                                     .col-xs-12
                                         .forget
-                                            a(href='/forgot') Forget your password?
+                                            a(href='/forgot') Forgot your password?
                                     .col-xs-12
                                         .submit-text
                                             input(type='submit', name='submit', value='Login')
-                .col-sm-6
-                    .single-input.p-bottom50.clearfix
-                        form#register_form(action='/register', method='post')
-                            p #{registerMess}
-                            .row
-                                .col-xs-4
-                                    .check-title
-                                        h3 Sign Up
-                            .row
-                                .col-sm-4
-                                    label First Name:
-                                    .input-text
-                                        input#first_name(type='text', name='first_name', required)
-                                .col-sm-4
-                                    label Middle Name:
-                                    .input-text
-                                        input#middle_name(type='text', name='middle_name')
-                                .col-sm-4
-                                    label Last Name:
-                                    .input-text
-                                        input#last_name(type='text', name='last_name', required)
-                            .row
-                                .col-sm-6
-                                    label Email:
-                                    .input-text
-                                        input#email(type='email', name='email', required)
-                                .col-sm-6
-                                    label Phone:
-                                    .input-text
-                                        input#phone(type='text', name='phone')
-                                .col-sm-6
-                                    label Street:
-                                    .input-text
-                                        input#street(type='text', name='street')
-                                .col-sm-6
-                                    label Zip code:
-                                    .input-text
-                                        input#zip(type='number', name='zip')
-                                .col-sm-6
-                                    label Originator NMLS Number:
-                                    .input-text
-                                        input#nmls(type='text', name='LOLicenseNumber')
-                                .col-sm-6
-                                    label Real Estate License Number:
-                                    .input-text
-                                        input#RELicenseNumber(type='text', name='RELicenseNumber')
-                                .col-xs-12
-                                    label Password:
-                                    .input-text
-                                        input#password(type='password', name='password', required)
-                                .col-xs-12
-                                    .billing-checkbox
-                                        input#subscribe.checkbox(type='checkbox', name='subscribe', value='1')
-                                        label Subscribe to our newsletters
-                                    .submit-text
-                                        input#submitButton(type='submit', value='Register')
 
     block script
         style.
@@ -91,7 +35,10 @@ block content
             }
 
         script.
-            var hideRegister = !{JSON.stringify(hideRegister)}
-            if (hideRegister) {
-                $('#register_form').hide();
+            var info = !{JSON.stringify(info)}
+            if (info && info.length > 0) {
+                $.alert({
+                    title: "Thank you",
+                    content: info
+                });
             }

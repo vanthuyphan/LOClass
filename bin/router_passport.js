@@ -30,19 +30,27 @@ function setupRegister() {
 
     now.web.get("/register", checkLogged, function (req, res) {
         var model;
-        if (req.user && req.user.oauth) {
+        console.log(req.query);
+        if (req.query.classCode) {
+            db.getClass(req.query.classCode, function(err, clazz) {
+                res.render('signup', {claz: clazz})
+            });
+        } else {
+            if (req.user && req.user.oauth) {
 
-            model = req.user.oauth.profile;
+                model = req.user.oauth.profile;
+            }
+            res.render("signup", model);
         }
-        res.render("login", model);
     });
 
     now.web.post("/register", checkLogged, function (req, res, next) {
+        console.log(req.body);
         var input = req.body;
 
-        if (!input.first_name || !input.email || !input.password) {
+        if (!input.first_name || !input.last_name || !input.email || !input.password) {
             req.body.registerMess = "NOT ENOUGH INFORMATION";
-            res.render("login", req.body);
+            res.render("signup", req.body);
         }
 
         if (req.user && req.user.oauth)  {
@@ -54,24 +62,45 @@ function setupRegister() {
             if (err) {
                 if (err.code === 'ER_DUP_ENTRY') {
                     req.body.registerMess = "EMAIL IS ALREADY IN THE SYSTEM";
-                    res.render("login", req.body);
+                    res.render("signup", req.body);
                     return;
                 }
                 next(err);
             }
 
+
             if (!req.user || !req.user.oauth) {
-                console.log(row)
-                row.subject = "Activate Your Account";
-                row.code = crypto.encrypt(row.code.toString());
-                now.mailer.sendMail(row, "activateAccount", function (err) {
-                    if (err) {
-                        res.render("error");
-                        throw err;
-                    } else {
+                if (req.body.classCode) {
+                    row.subject = "Your Loan Originator Class Registration";
+                    row.name = row.first_name;
+                    now.db.getClass(req.body.classCode, function (err, claz) {
+                        row.location = claz.location;
+                        row.datetime = claz.datetime;
+                        row.url = now.ini.web.url + '/view_class?code=' + crypto.encrypt(row.code.toString()) + '&classCode=' + claz.code;
+                        row.url = encodeURI(row.url);
                         res.render("info", {"message": "Please check your email box for further instruction"});
-                    }
-                })
+                        now.mailer.sendMail(row, "class_registration", function (err) {
+                            if (err) {
+                                res.render("error");
+                                throw err;
+                            } else {
+                                res.render("info", {"message": "Please check your email box for further instruction"});
+                            }
+                        })
+                    })
+                } else {
+                    row.subject = "Activate Your Account";
+                    row.name = row.first_name;
+                    row.code = crypto.encrypt(row.code.toString());
+                    now.mailer.sendMail(row, "activateAccount", function (err) {
+                        if (err) {
+                            res.render("error");
+                            throw err;
+                        } else {
+                            res.render("info", {"message": "Please check your email box for further instruction"});
+                        }
+                    })
+                }
                 return;
             }
 
@@ -102,7 +131,7 @@ function setupRegister() {
             if (err) {
                 throw err;
             } else {
-                res.render("info", {"message": "Your account is verified. Please login"});
+                res.render("login", {info: "Your account is verified. Please log in"});
             }
         })
     });
@@ -115,7 +144,7 @@ function setupRegister() {
         var user = req.body;
         db.changePassword(user.email, user.password, function (err) {
             if (!err) {
-                res.render("info", {"message": "Your password has been changed. Please login"});
+                res.render("login", {info: "Your password has been changed. Please login"});
             } else {
                 res.render("error");
                 throw err;
@@ -132,6 +161,7 @@ function setupRegister() {
             res.send("Expired request");
             return;
         }
+        console.log(code);
         db.getUserByCode(code, function (err, row) {
             if (!row) {
                 res.send("Invalid request");
@@ -161,6 +191,7 @@ function setupRegister() {
                     var date = new Date();
                     var expiredDate = date.setDate(date.getDate() + 1);
                     row.code = crypto.encrypt(expiredDate.toString() + "&" + row.code);
+                    row.name = row.first_name;
                     now.mailer.sendMail(row, "forgotPassword", function (err) {
                         if (err) {
                             res.render("error");
@@ -322,8 +353,7 @@ function setupPassport() {
                 if (err) {
                     return next(err);
                 }
-                console.log("LOGGGGED")
-                return res.redirect('/');
+                return res.redirect('/classes');
             });
         })(req, res, next);
     });

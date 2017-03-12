@@ -18,6 +18,7 @@ mailer.sendToMany = function (students, data, cb) {
         to += students[i].email + ";";
     }
     data.to = to;
+    data.name = '';
     sendEmail(data, template, cb);
 }
 
@@ -31,6 +32,9 @@ function sendEmail(data, template, cb) {
         else {
             data.baseUrl = now.ini.web.url;
             var compiledTmpl = jade.compile(file, {filename: template});
+            if (data.ishtml) {
+                var html = compiledTmpl(data);
+            }
             var html = compiledTmpl(data);
             var email = {
                 from: now.ini.mailgun.user,

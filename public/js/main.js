@@ -234,5 +234,4 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-	
-})(jQuery); 
+})(jQuery);

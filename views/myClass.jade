@@ -1,0 +1,154 @@
+extends layout.jade
+block content
+    section#details.product-details.section-padding-top
+        .container
+            .row
+                .col-xs-12.col-md-6.col-text-center
+                    .section-title.about-title.text-center
+                        h3 My Classes
+                        .shape
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+
+    section#myClasses.cart-page.section-padding
+        .container
+            .section-title.text-center
+                h3
+                    span REGISTERED
+                    |  CLASSES
+            .row
+                .col-xs-12
+                    .table-responsive.table-one.margin-minus.section-padding-bottom
+                        table.spacing-table.text-center
+                            thead
+                                tr
+                                    th Location
+                                    th Address
+                                    th Date/Time
+                                    th Class Size
+                                    th Withdraw
+                            tbody
+
+    block script
+        style.
+            #details {
+                margin-top: 150px;
+            }
+        script.
+            var user = !{JSON.stringify(user || {})}
+            var classes = !{JSON.stringify(classes || {})}
+            if (user && user.code) {
+                var remainingClasses = [];
+                var myClasses = [];
+                $.each(classes, function (index, claz) {
+                    if (claz.studentClassCode) {
+                        myClasses.push(claz)
+                    } else {
+                        remainingClasses.push(claz);
+                    }
+                })
+                $('#myClasses').find('tbody').empty();
+                $.each(myClasses, function (index, claz) {
+                    var combo = claz.code + "," + claz.studentClassCode;
+                    $('#myClasses').find('tbody')
+                        .append($('<tr>')
+                            .append($('<td>').css('display', 'none')
+                                .append(claz.code)
+                            )
+                            .append($('<td>')
+                                .append(claz.location)
+                            )
+                            .append($('<td>')
+                                .append(claz.address)
+                            )
+                            .append($('<td>')
+                                .append(claz.datetime)
+                            )
+                            .append($('<td>')
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
+                            )
+                            .append($('<td>')
+                                .append("<button class='btn submit-text' onclick='unRegisterCourse(" + combo + ")'> Withdraw </button>")
+                            )
+                        )
+                });
+                $('#class').find('tbody').empty();
+                $.each(remainingClasses, function (index, claz) {
+                    var enrollButton = "";
+                    if (claz.registed < claz.classSize) {
+                        enrollButton = "<button class='btn submit-text' onclick='registerCourse(" + claz.code + ")'> Enroll </button>"
+                    }
+                    $('#class').find('tbody')
+                        .append($('<tr>')
+                            .append($('<td>').css('display', 'none')
+                                .append(claz.code)
+                            )
+                            .append($('<td>')
+                                .append(claz.location)
+                            )
+                            .append($('<td>')
+                                .append(claz.address)
+                            )
+                            .append($('<td>')
+                                .append(claz.datetime)
+                            )
+                            .append($('<td>')
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
+                            )
+                            .append($('<td>')
+                                .append(enrollButton)
+                            )
+                        )
+                })
+            } else {
+                $('#myClasses').hide();
+                $('#class').find('tbody').empty();
+                $.each(classes, function (index, claz) {
+                    var enrollButton = "";
+                    if (claz.registed < claz.classSize) {
+                        enrollButton = "<button class='btn submit-text' onclick='registerCourse(" + claz.code + ")'> Enroll </button>"
+                    }
+                    $('#class').find('tbody')
+                        .append($('<tr>')
+                            .append($('<td>').css('display', 'none')
+                                .append(claz.code)
+                            )
+                            .append($('<td>')
+                                .append(claz.location)
+                            )
+                            .append($('<td>')
+                                .append(claz.address)
+                            )
+                            .append($('<td>')
+                                .append(claz.datetime)
+                            )
+                            .append($('<td>')
+                                .append(claz.registed || 0).append("/").append(claz.classSize)
+                            )
+                            .append($('<td>')
+                                .append(enrollButton)
+                            )
+                        )
+                })
+            }
+            function registerCourse(code) {
+                var user = !{JSON.stringify(user || {})}
+                if (user && user.code) {
+                    $.post('registerClass', {
+                        userCode: user.code,
+                        classCode: code,
+                    }, function (res, err) {
+                        location.reload();
+                    })
+                } else {
+                    window.location = '/register?classCode=' + code;
+                }
+            }
+
+            function unRegisterCourse(code, studentClassCode) {
+                $.post('unRegisterClass', {
+                    code: studentClassCode,
+                    classCode: code
+                }, function (res, err) {
+                    location.reload();
+                })
+            }

@@ -16,7 +16,31 @@ block content
                                                         | Dear #{name},
                                                     br
                                                     p
-                                                        | Please click here to reset your password:
+                                                        | Thank you for your registration.  Below is your class information:
+                                                    br
+                                                    br
+                                                    | Class Name: Loan Factory Class
+                                                    br
+                                                    | Location: #{location}
+                                                    br
+                                                    | Date and Time: #{datetime}
+                                                    br
+                                                    | Instructor: Thuan Nguyen
+                                                    br
+                                                    | Instructor Phone: (408) 4449999
+                                                    br
+                                                    br
+                                                    | The fee for the class is $221 and due on the date of the class.
+                                                    br
+                                                    | Please click in the button below to access the class online as well as to activate your account
+                                                    br
+                                                    | Please do not hesitate to contact me if you have any questions.
+                                                    br
+                                                    p
+                                                    | Sincerely Yours,
+                                                    br
+                                                    | Thuan Nguyen
+
     tr
         td(align='center', valign='top')
             table(border='0', cellpadding='0', cellspacing='0', width='100%')
@@ -28,5 +52,5 @@ block content
                                     table.emailButton(border='0', cellpadding='0', cellspacing='0', width='50%', style='background-color: rgb(243,123,1);')
                                         tr
                                             td.buttonContent(align='center', valign='middle', style='padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;')
-                                                a(style='color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;', href= baseUrl + '/reset_password?email=' + email + '&code=' + code) Reset
+                                                a(style='color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;', href=url, target='_blank') View Class
 

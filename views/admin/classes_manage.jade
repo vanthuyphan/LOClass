@@ -71,7 +71,7 @@ block content
                                 input#subject(type='text', name='subject', required)
                             label Message:
                             .input-text
-                                textarea#message(type='text', name='message', rows="4", cols="50")
+                                textarea#message(type='html', name='message', rows="4", cols="50")
                             .submit-text
                                 input#submitButton(type='button', class='btn btn-small btn-blue', value='Send', onclick="sendEmails()")
 
@@ -100,7 +100,6 @@ block script
 
     script.
         var savedClassCode = '';
-
         function viewStudent(classCode) {
             $('html, body').animate({
                 scrollTop: $("#students").offset().top
@@ -179,7 +178,7 @@ block script
                 $.post('email_students', {classCode: clazCode, subject: subject, message: message}, function (res, ee) {
                     $.alert({
                         title: "INFO",
-                        content: "Saved"
+                        content: "Sent"
                     })
                 })
             } else {

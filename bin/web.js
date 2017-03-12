@@ -48,16 +48,18 @@ exports.init = function (_now, cb) {
     router.init(now, function (err) {
         if (err) throw err;
 
-
         now.router.use(function (err, req, res, next) {
             console.error(err.stack);
-            res.status(500).send("System errror!");
+            res.status(500).render("info", {"message": "OOps! Looks like something went wrong. Pleas have our apology!"});
+            res.status(404).render("info", {"message": "Oops! You're not supposed to go here"});
+            if (err) {
+                res.render("info", {"message": "OOps! Looks like something went wrong. Pleas have our apology!"});
+            }
             req.next(err);
         });
 
         server.listen(now.ini.web.port, now.ini.web.host, function (err) {
             if (err) throw err;
-
             cb();
         });
     });

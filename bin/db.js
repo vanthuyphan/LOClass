@@ -46,18 +46,14 @@ db.verifyUser = function(code, cb) {
 
 db.insertUser = function(model, cb) {
     console.log("INSERTING")
-    now.mysql.query("INSERT INTO User(email, first_name, last_name, subscribe, phone, password, middle_name, street, zip, RENumber, LONumber) VALUES(?, ?, ?, ?, ?, ?);", [
+    now.mysql.query("INSERT INTO User(email, first_name, last_name, password, zip, phone, street) VALUES(?, ?, ?, ?, ?, ?, ?);", [
         model.email,
         model.first_name,
         model.last_name,
-        model.subscribe,
-        model.phone,
         model.password,
-        model.middle_name,
-        model.street,
-        model.zip,
-        model.RENumber,
-        model.LONumber
+        model.zip || '',
+        model.phone || '',
+        model.street || ''
     ], function(err, result) {
         if (err) {
             console.log(err)
@@ -139,6 +135,17 @@ db.getClasses = function(cb) {
     });
 };
 
+db.getClass = function(code, cb) {
+    now.mysql.query("SELECT * FROM `Class` WHERE code = ?", [code], function(err, rows) {
+        if (rows) {
+            console.log(rows[0])
+            cb(err, rows[0]);
+        } else {
+            cb(err);
+        }
+    });
+};
+
 db.updateClass = function(model, cb) {
     now.mysql.query("UPDATE `Class` SET location = ?, datetime=?, fee=?, address=?, classSize=?, registed=? WHERE code = ?;",
         [model.editLocation, model.editDatetime, model.editFee, model.editAddress, model.editClassSize, model.editRegisted, model.editCode]
@@ -197,7 +204,6 @@ db.getClassesWithUser = function (userCode, cb) {
 }
 
 db.saveClass = function (model, cb) {
-    console.log("Save class")
     now.mysql.query("INSERT INTO `Class` SET ?", {
         location: model.location,
         datetime: model.datetime,
@@ -221,9 +227,13 @@ db.registerClass = function (model, cb) {
         model.userCode,
         model.classCode
     ], function(err, result) {
-        now.mysql.query("UPDATE `Class` SET registed = registed + 1 WHERE code = ?;", [model.classCode], function(err, result) {
-            cb(err);
-        });
+        if (result && result.insertId) {
+            now.mysql.query("UPDATE `Class` SET registed = registed + 1 WHERE code = ?;", [model.classCode], function(err, result) {
+                cb(err);
+            });
+        } else {
+            cb();
+        }
     });
 }
 

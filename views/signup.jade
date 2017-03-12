@@ -1,57 +1,78 @@
-mixin signup(id)
-    #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-        .modal-header
-            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-            h3 Have an Account?
-        .modal-body
-            .well
-                ul.nav.nav-tabs
-                    li.active
-                        a(href='#login', data-toggle='tab') Login
-                    li
-                        a(href='#create', data-toggle='tab') Create Account
-                #myTabContent.tab-content
-                    #login.tab-pane.active.in
-                        form.form-horizontal(action='/login', method='POST')
-                            fieldset
-                                #legend
-                                    legend Login
-                                .control-group
-                                    // Username
-                                    label.control-label(for='username') Email
-                                    .controls
-                                        input#username.input-xlarge(type='text', name='email', placeholder='')
-                                .control-group
-                                    // Password
-                                    label.control-label(for='password') Password
-                                    .controls
-                                        input#password.input-xlarge(type='password', name='password', placeholder='')
-                                .control-group
-                                    // Button
-                                    .controls
-                                        button.btn.btn-success Login
-                    #create.tab-pane.fade
-                        form.form-horizontal(action='/register', method='POST')
-                            fieldset
-                                #legend
-                                    legend Register
-                                .control-group
-                                    // Username
-                                    label.control-label(for='username') Email
-                                    .controls
-                                        input#username.input-xlarge(type='text', name='email', placeholder='')
-                                .control-group
-                                    // Password
-                                    label.control-label(for='password') Password
-                                    .controls
-                                        input#password.input-xlarge(type='password', name='password', placeholder='')
-                                .control-group
-                                    // Password
-                                    label.control-label(for='password') Confirm
-                                    .controls
-                                        input#password.input-xlarge(type='password', name='confirm', placeholder='')
-                                .control-group
-                                    // Button
-                                    .controls
-                                        button.btn.btn-success Create Account
+extends layout.jade
+block content
+    section#login.login-page.section-padding
+        .container
+            .row
+                .col-xs-12.col-md-6.col-text-center
+                    .section-title.about-title.text-center
+                        h3 Sign Up
+                        .shape
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+            if (claz)
+                .row#info
+                    .col-sm-12
+                        h5 Class Information:
+                        br
+                        | Location: #{claz.location}
+                        br
+                        | Date / time: #{claz.datetime}
+                        br
+                        | Address: #{claz.address}
+
+            .row
+                .col-sm-12
+                    .single-input.p-bottom50.clearfix
+                        form#register_form(action='/register', method='post')
+                            p #{registerMess}
+                                .row
+                                    if (claz)
+                                        input#classCode(type='text', value=claz.code || '', name='classCode', style='display: none')
+                                    .col-sm-6
+                                        label First Name:
+                                        .input-text
+                                            input#first_name(type='text', name='first_name', required)
+                                    .col-sm-6
+                                        label Last Name:
+                                        .input-text
+                                            input#last_name(type='text', name='last_name', required)
+                                .row
+                                    .col-sm-6
+                                        label Email:
+                                        .input-text
+                                            input#email(type='email', name='email', required)
+                                    .col-sm-6
+                                        label Phone (optional):
+                                        .input-text
+                                            input#phone(type='text', name='phone')
+                                    .col-sm-6
+                                        label Street (optional):
+                                        .input-text
+                                            input#street(type='text', name='street')
+                                    .col-sm-6
+                                        label Zip code (optional):
+                                        .input-text
+                                            input#zip(type='number', name='zip')
+                                    .col-xs-12
+                                        label Password:
+                                        .input-text
+                                            input#password(type='password', name='password', required)
+                                    .col-xs-12
+                                        .submit-text
+                                            input#submitButton(type='submit', value='Register')
+                                    .col-xs-12
+                                        .forget
+                                            a(href='/login') Already have an account? Login instead
+
+
+
+
+    block script
+        style.
+            #login {
+                margin-top: 150px;
+            }
+
+            #register_form {
+                margin-top: 50px;
+            }
 

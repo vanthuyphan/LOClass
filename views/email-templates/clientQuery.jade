@@ -1,4 +1,33 @@
-doctype html
-html(lang='en')
-    body
-        h1 #{email} - #{name} has this message for you: #{message}
+extends email_layout.jade
+block content
+    tr(mc:hideable='')
+        td(align='center', valign='top')
+            table(border='0', cellpadding='0', cellspacing='0', width='100%')
+                tr
+                    td(align='center', valign='top')
+                        table.flexibleContainer(border='0', cellpadding='30', cellspacing='0', width='500')
+                            tr
+                                td.flexibleContainerCell(valign='top', width='500')
+                                    table(border='0', cellpadding='0', cellspacing='0', width='100%')
+                                        tr
+                                            td.textContent(valign='top')
+                                                div(mc:edit='body', style='text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;')
+                                                    p
+                                                        | Dear #{name},
+                                                    br
+                                                    p
+                                                        | #{email} has just sent you this message: #{message}
+    tr
+        td(align='center', valign='top')
+            table(border='0', cellpadding='0', cellspacing='0', width='100%')
+                tr(style='padding-top:0;')
+                    td(align='center', valign='top')
+                        table.flexibleContainer(border='0', cellpadding='30', cellspacing='0', width='500')
+                            tr
+                                td.flexibleContainerCell(style='padding-top:0;', align='center', valign='top', width='500')
+                                    table.emailButton(border='0', cellpadding='0', cellspacing='0', width='50%', style='background-color: rgb(243,123,1);')
+                                        tr
+                                            td.buttonContent(align='center', valign='middle', style='padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;')
+                                                a(style='color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;', href= baseUrl + '/reset_password?email=' + email + '&code=#' + code) Activate
+
+

@@ -283,7 +283,7 @@ block content
                                     th Address
                                     th Date/Time
                                     th Class Size
-                                    th Enroll
+                                    th Register
                             tbody
 
     section#myClasses.cart-page.section-padding
@@ -375,7 +375,7 @@ block content
                                 .append(enrollButton)
                             )
                         )
-                })
+                });
             } else {
                 $('#myClasses').hide();
                 $('#class').find('tbody').empty();
@@ -417,7 +417,7 @@ block content
                         location.reload();
                     })
                 } else {
-                    window.location = '/login';
+                    window.location = '/register?classCode=' + code;
                 }
             }
 
