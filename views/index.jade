@@ -19,37 +19,45 @@ block content
             .row
                 .col-xs-12
                     .table-responsive.table-one.margin-minus.section-padding-bottom
-                        .section-title.text-center
-                            h3
-                                span LOAN PROCESSING
-                                |  CLASSES
-                            .actions-btn
-                                    a.shop-btn(href='/classes') View Classes
+                        section.featured-area.featured-one.section-padding
+                            .container
+                                .row
+                                    .col-xs-12.col-sm-8.col-md-6.col-text-center
+                                        .section-title.text-center
+                                            h3
+                                                span Loan Originator
+                                                |  Classes
+                                            .shape
+                                                img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+                                            p
+                                                | We expect that you should be able to obtain the NMLS Loan Originator license.  Loan Factory will focus on the practical training that will help you become a successful Loan Originator.  Therefore, there will be two classes:
+                                .row.text-center
+                                    section#services.section.section-padded
+                                        .container
+                                            .row.services
+                                                .col-md-5
+                                                    .service
+                                                        .icon-holder
+                                                            img.icon(src='/public/img/icon/house.png', alt='')
+                                                        h4.heading
+                                                            a(href='/classes?tab=1') Pre-license Education Class
+                                                        p.description
+                                                            | Some description about Pre-license Education Class
+                                                .col-md-2
+                                                    .service-middle
+                                                        .icon-holder
+                                                            img
+                                                        h4.section-title.text-center AND
+                                                .col-md-5
+                                                    .service
+                                                        .icon-holder
+                                                            img.icon(src='/public/img/icon/house.png', alt='')
+                                                        h4.heading
+                                                                a(href='/classes?tab=2') Practical Training Class
+                                                        p.description
+                                                            | Some description about Practical Training Class
+                                        .cut.cut-bottom
 
-    section.blog-area.blog-one.section-padding
-        .container
-            .row
-                .col-xs-12.col-sm-8.col-md-6.col-text-center
-                    .section-title.text-center
-                        h3
-                            span FROM
-                            |  BLOG
-                        .shape
-                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
-            .row
-                each post, index in posts || []
-                    .col-xs-12.col-sm-6.col-md-4
-                        .blog-item
-                            .blog-img
-                                a(href='product-details.html')
-                                    img(src='/public/img/blog/1.jpg', alt='Blog')
-                            .blog-text.clearfix
-                                hr.line
-                                a(href='single-blog.html')
-                                    h4 Lights & Motion Night Light
-                                p
-                                    span 15 dec
-                                p
-                                    | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form...
-                                .view-more
-                                    a.shop-btn(href='single-blog.html') View More
+
+
+

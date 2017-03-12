@@ -13,9 +13,9 @@ block content
                     .pro-des-tab
                         .tab-menu
                             ul
-                                li.active
+                                li#first-tab.active
                                     a(data-toggle='tab', href='#pre') LICENSING REQUIREMENTS
-                                li
+                                li#second-tab
                                     a(data-toggle='tab', href='#info') INFORMATION
                                 li
                                     a(data-toggle='tab', href='#instructor') INSTRUCTOR
@@ -313,6 +313,16 @@ block content
         script.
             var user = !{JSON.stringify(user || {})}
             var classes = !{JSON.stringify(classes || {})}
+            var tabIndex = window.location.href.indexOf("tab");
+            if (tabIndex > -1) {
+                var tabName = window.location.href.substring(tabIndex + 4, tabIndex+5);
+                if (tabName == 2) {
+                    $("#info").addClass('active');
+                    $("#second-tab").addClass('active');
+                    $("#first-tab").removeClass('active');
+                    $("#pre").removeClass('active');
+                }
+            }
             if (user && user.code) {
                 var remainingClasses = [];
                 var myClasses = [];

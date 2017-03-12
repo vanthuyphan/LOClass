@@ -65,16 +65,14 @@ router.get("/account", function(req, res) {
 
 router.get("/classes", function(req, res) {
     if (req.user && req.user.code) {
-        console.log("With uer");
         db.getClassesWithUser(req.user.code, function (err, classes) {
             if (err) throw err;
             console.log(classes);
-            res.render("classes", {classes: classes});
+            res.render("classes", {classes: classes, tab: req.query.tab});
         })
     } else {
-        console.log("WithOUT uer");
         db.getClasses(function(err, classes) {
-            res.render("classes", {classes: classes});
+            res.render("classes", {classes: classes, tab: req.query.tab});
         });
     }
 
