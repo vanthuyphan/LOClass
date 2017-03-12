@@ -316,7 +316,7 @@ input:focus, textarea:focus {outline: 0px;}
 	top: -20px;
 }
 .slide-text h1 {
-    color: #fff;
+    color: #000000;
     font-size: 60px;
     line-height: 1;
 }
@@ -340,7 +340,7 @@ input:focus, textarea:focus {outline: 0px;}
     right: 0;
 }
 .slide-text h4 {
-	color: #fff;
+	color: #000000;
 	margin-bottom: 30px;
 	font-weight: 400;
 }
