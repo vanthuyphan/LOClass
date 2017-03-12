@@ -67,10 +67,10 @@ INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verif
 INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("van2@mail.com", 'Van', "Phan", 0, '122', 'pppppp', 1, 1);
 INSERT INTO User(email, first_name, last_name, subscribe, phone, password, verified, isAdmin) VALUES("thuan@loanfactory.com", 'Thuan', "Nguyen", 0, '122', 'Himark101', 1, 1);
 
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'April 1, 2017 Mar 6-9 9AM-2PM PST', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Orange County Office", '9523 Bolsa Ave., Westminster, CA 92683', 200, 10, 'April 22, 2017', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'May 6, 2017', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'May 27, 2017', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Seattle Office", '707 South Grady Way, Suite 600, Renton, WA 98057',  200, 15, 'June 3, 2017', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'June 10, 2017', 0);
-INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Minneapolis Office", '3015 85th Ave., N. Brooklyn Park, MN 55444', 200, 15, 'June 17, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'April 1, 2017 It can be Mar 6-9 9AM-2PM PST (if more than 1 day) or Mar 6,7,9,11 9AM-2PM PST', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Orange County Office", '9523 Bolsa Ave., Westminster, CA 92683', 200, 10, 'April 22-23, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'May 6-7, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'May 27-28, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Seattle Office", '707 South Grady Way, Suite 600, Renton, WA 98057',  200, 15, 'June 3-4, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("San Jose Office", '639 Tully Rd., Suite C, San Jose, CA 95111', 200, 15, 'June 10-11, 2017', 0);
+INSERT INTO Class(location, address, fee, classSize, `datetime`, registed) VALUES("Minneapolis Office", '3015 85th Ave., N. Brooklyn Park, MN 55444', 200, 15, 'June 17-18, 2017', 0);
