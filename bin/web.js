@@ -50,11 +50,9 @@ exports.init = function (_now, cb) {
 
         now.router.use(function (err, req, res, next) {
             console.error(err.stack);
-            res.status(500).render("info", {"message": "OOps! Looks like something went wrong. Pleas have our apology!"});
             res.status(404).render("info", {"message": "Oops! You're not supposed to go here"});
-            if (err) {
-                res.render("info", {"message": "OOps! Looks like something went wrong. Pleas have our apology!"});
-            }
+            res.status(500)
+            res.render("info", {"message": "OOps! Looks like something went wrong. Pleas have our apology!"});
             req.next(err);
         });
 
