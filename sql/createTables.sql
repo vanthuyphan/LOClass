@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `StudentClass` (
 	FOREIGN KEY (classCode) REFERENCES Class(code),
 	FOREIGN KEY (userCode) REFERENCES User(code)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-CREATE UNIQUE INDEX student_index ON StudentClass (classCode, userCode)
+CREATE UNIQUE INDEX student_index ON StudentClass (classCode, userCode);
 
 DROP TABLE `EmailHistory`;
 CREATE TABLE IF NOT EXISTS `EmailHistory` (
