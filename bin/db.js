@@ -179,7 +179,7 @@ db.getEmail = function(code, cb) {
 };
 
 db.saveNote = function(model, cb) {
-    now.mysql.query("UPDATE `USER` SET note = ? WHERE code = ?;", [model.note, model.studentCode], function(err, rows) {
+    now.mysql.query("UPDATE `User` SET note = ? WHERE code = ?;", [model.note, model.studentCode], function(err, rows) {
         cb(err);
     });
 };
