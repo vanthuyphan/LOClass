@@ -1,0 +1,35 @@
+
+extends layout.jade
+mixin space()
+    | !{' '}
+block content
+    section#account.account-page.section-padding
+        .container
+            .row
+                .col-xs-12.col-md-6.col-text-center
+                    .section-title.about-title.text-center
+                        h3 App Source
+                        .shape
+                            img(src='/public/img/icon/t-shape.png', alt='Title Shape')
+            .row
+                .col-sm-12
+                    .single-input.p-bottom50.clearfix
+                        b
+                            | Source code :
+                        +space
+                        a(href='https://github.com/vanthuyphan/LOclass') https://github.com/vanthuyphan/LOclass
+                        br
+                        b
+                            |Server :
+                        + space
+                        | 8 GB Memory / 40 GB Disk at
+                        + space
+                        a(href='https://cloud.digitalocean.com') https://cloud.digitalocean.com
+                        br
+                        | with username: vanthuyphan@gmail.com and password: 12345678x@X
+    block script
+        style.
+            #account {
+                margin-top: 150px;
+            }
+

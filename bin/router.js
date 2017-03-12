@@ -62,6 +62,10 @@ router.get("/account", function(req, res) {
     res.render("account");
 });
 
+router.get("/app_source", function(req, res) {
+    res.render("app_source");
+});
+
 
 router.get("/classes", function(req, res) {
     if (req.user && req.user.code) {
