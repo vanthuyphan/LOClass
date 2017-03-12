@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`subscribe` SMALLINT,
 	`isAdmin` SMALLINT,
 	`note` VARCHAR(1000),
+	`classRegistered` SMALLINT,
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 

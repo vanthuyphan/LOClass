@@ -304,7 +304,24 @@ block content
                                         | He has personally closed over 1000 loans in 2016 and over 3000 loans in his career.
 
 
-    // product details area end
+    section#myClasses.cart-page.section-padding
+        .container
+            .section-title.text-center
+                h3
+                    span YOUR
+                    |  CLASS
+            .row
+                .col-xs-12
+                    .table-responsive.table-one.margin-minus.section-padding-bottom
+                        table.spacing-table.text-center
+                            thead
+                                tr
+                                    th Location
+                                    th Address
+                                    th Date/Time
+                                    th Class Size
+                                    th Withdraw
+                            tbody
 
     section#classes.cart-page.section-padding
         .container
@@ -323,25 +340,6 @@ block content
                                     th Date/Time
                                     th Class Size
                                     th Register
-                            tbody
-
-    section#myClasses.cart-page.section-padding
-        .container
-            .section-title.text-center
-                h3
-                    span YOUR
-                    |  CLASSES
-            .row
-                .col-xs-12
-                    .table-responsive.table-one.margin-minus.section-padding-bottom
-                        table.spacing-table.text-center
-                            thead
-                                tr
-                                    th Location
-                                    th Address
-                                    th Date/Time
-                                    th Class Size
-                                    th Withdraw
                             tbody
 
     block script
@@ -401,7 +399,7 @@ block content
                 $('#class').find('tbody').empty();
                 $.each(remainingClasses, function (index, claz) {
                     var enrollButton = "";
-                    if (claz.registed < claz.classSize) {
+                    if (claz.registed < claz.classSize && myClasses.length == 0) {
                         enrollButton = "<button class='btn submit-text' onclick='registerCourse(" + claz.code + ")'> Register </button>"
                     }
                     $('#class').find('tbody')

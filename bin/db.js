@@ -179,7 +179,7 @@ db.getEmail = function(code, cb) {
 };
 
 db.saveNote = function(model, cb) {
-    now.mysql.query("UPDATE `User` SET note = ? WHERE code = ?;", [model.note, model.studentCode], function(err, rows) {
+    now.mysql.query("UPDATE `USER` SET note = ? WHERE code = ?;", [model.note, model.studentCode], function(err, rows) {
         cb(err);
     });
 };
@@ -247,7 +247,7 @@ db.unregisterClass = function (model, cb) {
 
 db.createEmailHistory = function(model, cb) {
     console.log(model);
-    now.mysql.query("INSERT INTO EmailHistory(`from`, `to`, `subject`) VALUES(?, ?, ?);", [model.from, model.to, model.subject, new Buffer(model.html).toString('base64')], function(err, result) {
+    now.mysql.query("INSERT INTO EmailHistory(`from`, `to`, `subject`, ``) VALUES(?, ?, ?, ?);", [model.from, model.to, model.subject, new Buffer(model.html).toString('base64')], function(err, result) {
         cb(err);
     });
 };
