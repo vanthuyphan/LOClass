@@ -52,10 +52,8 @@ function sendEmail(data, template, cb) {
                 };
 
                 mailgun.messages().sendMime(dataToSend, function (sendError, body) {
-                    console.log(sendError);
                     if (!sendError) {
                         now.db.createEmailHistory(email, function (err) {
-                            console.log("Created History")
                             cb(err);
                         });
                     } else {

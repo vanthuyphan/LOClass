@@ -16,7 +16,6 @@ block content
                         th From
                         th To
                         th Subject
-                        th Content
                 tbody
                     each history, index in histories || []
                         tr(class=(i % 2 == 0) ? 'odd' : 'even')
@@ -24,8 +23,6 @@ block content
                             td #{history.from}
                             td #{history.to}
                             td #{history.subject}
-                            td
-                                button.btn.btn-small.btn-blue(onclick='viewEmail(' + history.code + ')')  Content
 
 
 block script
