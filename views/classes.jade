@@ -1,4 +1,6 @@
 extends layout.jade
+mixin space()
+    | !{' '}
 block content
     section#details.product-details.section-padding-top
         .container
@@ -34,7 +36,29 @@ block content
                                     br
                                     | 2. Pass the state and national exam.
                                     br
-                                    | Below are the license requirement for some states
+                                    hr
+                                    | License requirements for
+                                    select#state.form-control(style='width: 150px', onchange='onStateChanged()')
+                                        - repeation = [ 'CALIFORNIA', 'TEXAS', 'WASHINGTON', 'MINNESOTA']
+                                        each item in repeation
+                                            option() #{item}
+
+
+                                    p#requirements
+                                    hr
+                                    | We have decided to partner with Loan Officer School to provide you with the 20-hour pre-license education.
+                                    | You will need to visit their website
+                                    +space
+                                    a(href='http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course')
+                                        | www.LoanOfficerSchool.com
+                                    +space
+                                    | and register for an online class that fits your schedule.  The fee for this class is $379.
+                                    br
+                                    | Please make sure to use DISCOUNT CODE loanfactory when you check out the class.
+                                    | It is IMPORTANT that you use this code when registering.  Otherwise, we will not have your information.
+                                    br
+                                    br
+                                    | The school will also provide you the exam preparation.  Please take advantage of these materials to prepare for the exam.
 
                             #info.tab-pane.fade.in.single-blog-page
                                 .des-text
@@ -42,7 +66,11 @@ block content
                                         | We expect that you should be able to obtain the NMLS Loan Originator license.  Loan Factory will focus on the practical training that will help you become a successful Loan Originator.  Therefore, there will be two classes:
                                     br
                                     p
-                                        | Pre-license Online Education Class: We have decided to partner with Loan Officer School to provide you with the 20-hour pre-license education.  You will need to visit their website www.LoanOfficerSchool.com (make sure it is linked to http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course) and register for an online class that fits your schedule.  The fee for this class is $379.  Please make sure to use DISCOUNT CODE loanfactory when you check out the class. It is IMPORTANT that you use this code when registering.  Otherwise, we will not have your information.
+                                        | Pre-license Online Education Class: We have decided to partner with Loan Officer School to provide you with the 20-hour pre-license education.  You will need to visit their website
+                                        +space
+                                        a(ahref='http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course') www.LoanOfficerSchool.com
+                                        +space
+                                        | and register for an online class that fits your schedule.  The fee for this class is $379.  Please make sure to use DISCOUNT CODE loanfactory when you check out the class. It is IMPORTANT that you use this code when registering.  Otherwise, we will not have your information.
                                     br
                                     p
                                         | Loan Factory Class: After taking the Pre-license Education Class above, we will spend 1 full day in a classroom to learn about the tools and knowledge needed to be a successful Loan Originator.  The class will cover PRACTICAL aspects of being a loan originator.  The class is comprised of live instruction, group discussions, and case studies.
@@ -78,7 +106,12 @@ block content
                                         | Upon completion of the class, you may have a chance to obtain real-world experience by working with our experienced loan processor or becoming a Loan Factory loan originator.
                                     br
                                     p
-                                        | The fee for the Loan Factory class is $221.  You can pay this fee on the day of the class.  The total fee that you will pay is $600 (for both classes).  Loan Factory will reimburse you the full $600 fee if you obtain the license and close a loan with Loan Factory.  You must register with www.LoanOfficerSchool.com (make sure it is linked to http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course) using DISCOUNT CODE loanfactory in order to get the $600 reimbursed.  Please contact us if you have any problems with registration 408-292-9222
+                                        | The fee for the Loan Factory class is $221.  You can pay this fee on the day of the class.  The total fee that you will pay is $600 (for both classes).  Loan Factory will reimburse you the full $600 fee if you obtain the license and close a loan with Loan Factory.
+                                        | You must register with
+                                        +space
+                                        a(ahref='http://shop.loanofficerschool.com/products/live-online-20-hour-nmls-licensing-course') www.LoanOfficerSchool.com
+                                        +space
+                                        | using DISCOUNT CODE loanfactory in order to get the $600 reimbursed.  Please contact us if you have any problems with registration 408-292-9222
                                     br
                                     p
                                         | Time: All day on Saturday, from 8am to 5pm
@@ -320,6 +353,7 @@ block content
             var user = !{JSON.stringify(user || {})}
             var classes = !{JSON.stringify(classes || {})}
             var tabIndex = window.location.href.indexOf("tab");
+            onStateChanged();
             if (tabIndex > -1) {
                 var tabName = window.location.href.substring(tabIndex + 4, tabIndex+5);
                 if (tabName == 2) {
@@ -444,4 +478,23 @@ block content
                 }, function (res, err) {
                     location.reload();
                 })
+            }
+
+            function onStateChanged() {
+                var selected = $("#state :selected").text();
+                var info = '';
+                if (selected == "CALIFORNIA") {
+                    info = `<br><b>California Bureau of Real Estate</b>
+                        <br>1651 Exposition Blvd.
+                        <br>Sacramento, CA 95815
+                        <br><b>California Department of Business Oversight</b>
+                        <br>One Sansome Street, Suite 600
+                        <br>San Francisco, CA 94104-4428
+                        <br><br>To register for a California NMLS licensing class phone 415-587-5435 or 650-294-8750
+                        <br>California Mortgage Loan Officers can be licensed through either <a href='http://www.bre.ca.gov/Licensees/MLOLicense.html#5'> The California Bureau of Real Estate </a> (with a CA Real Estate License)or <a href='http://www.dbo.ca.gov/'>The California Department of Business Oversight </a> (without a CA Real Estate License).
+                        <br> Both agencies require the national 20-hour class. Department of Business Oversight regulated loan officers require 2 hours of CA state law.
+                        <br>LoanOfficerSchool.com will include your additional 2 hours of state law with our national 20-hour course at no additional cost.
+                        <br><br>California does require a state test for licensing, requires 2 hours of CA state law for those that are currently NMLS licensed elsewhere, and requires 8 hours of continuing education (CE) for NMLS licensed mortgage loan officers annually`;
+                }
+                $("#requirements").html(info)
             }
