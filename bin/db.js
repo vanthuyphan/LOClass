@@ -247,7 +247,7 @@ db.unregisterClass = function (model, cb) {
 
 db.createEmailHistory = function(model, cb) {
     console.log(model);
-    now.mysql.query("INSERT INTO EmailHistory(`from`, `to`, `subject`, ``) VALUES(?, ?, ?, ?);", [model.from, model.to, model.subject, new Buffer(model.html).toString('base64')], function(err, result) {
+    now.mysql.query("INSERT INTO EmailHistory(`from`, `to`, `subject`) VALUES(?, ?, ?, ?);", [model.from, model.to, model.subject, new Buffer(model.html).toString('base64')], function(err, result) {
         cb(err);
     });
 };
