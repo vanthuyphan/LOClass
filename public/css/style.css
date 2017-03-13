@@ -59,6 +59,10 @@ a {
 	font-family: 'Montserrat', sans-serif;
 }
 
+.background-shadow {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 .home-page-text h5 {
     margin-top: 20px;
     color: #373737;
@@ -127,6 +131,7 @@ hr.line {
 .d-tablecell {
     display: table-cell;
     vertical-align: middle;
+
 }
 .col-text-center{
 	float: none !important;
@@ -311,14 +316,14 @@ input:focus, textarea:focus {outline: 0px;}
 .slide-text {
 	position: absolute;
 	right: 0;
-	text-align: left;
+	text-align: right;
 	width: 775px;
 	top: -20px;
 }
 .slide-text h1 {
-    color: #000000;
-    font-size: 60px;
-    line-height: 1;
+    color: #db670e;
+    font-size: 50px;
+    line-height: 2;
 }
 .shape {
     padding: 16px 0;
@@ -340,8 +345,8 @@ input:focus, textarea:focus {outline: 0px;}
     right: 0;
 }
 .slide-text h4 {
-	color: #000000;
-	margin-bottom: 30px;
+	color: #d88217;
+	margin-bottom: 40px;
 	font-weight: 400;
 }
 a.shop-btn ,a.btn-style {
