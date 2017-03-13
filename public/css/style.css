@@ -100,7 +100,7 @@ a:active, a:hover {
 i{font-size:16px;}
 p{
 	color:#444;
-	font-size:14px;
+	font-size:16px;
 	font-weight:400;
 	line-height:24px;
 }
@@ -176,7 +176,7 @@ hr.line {
 body {
 	font-family: 'Roboto', sans-serif;
 	color:#444;
-	font-size:14px;
+	font-size:16px;
 	font-weight:400;
 }
 ::-moz-selection {
@@ -227,12 +227,12 @@ input:focus, textarea:focus {outline: 0px;}
 }
 .header-top .left li {
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 300;
     margin-right: 30px;
 }
 .header-top .left li i, .header-top .right li i {
-    font-size: 14px;
+    font-size: 16px;
     margin-right: 10px;
 }
 .right li form {
@@ -245,7 +245,7 @@ input:focus, textarea:focus {outline: 0px;}
     background: transparent none repeat scroll 0 0;
     border: 0 none;
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 300;
     transition: all 0.3s ease 0s;
     width: 45px;
@@ -261,7 +261,7 @@ input:focus, textarea:focus {outline: 0px;}
 .header-top .right li, .header-top .right li a {
 	color: #fff;
 	font-family: roboto;
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 300;
 }
 .header-bottom .container {padding: 0 30px;}
@@ -388,7 +388,7 @@ a.shop-btn:hover,a.btn-style:hover {color: #fff;}
 }
 .mainmenu nav> ul> li> a {
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 94px;
     padding: 0 25px;
@@ -604,7 +604,7 @@ ul.mega-menu > li {
 }
 .cart-menu-title h5, .cart-menu-title span {
     color: #333;
-    font-size: 12px;
+    font-size: 14px;
 }
 .cart-menu-title h5 {
     margin-bottom: 5px;
@@ -690,14 +690,14 @@ ul.mega-menu > li {
 .actions-btn a i:hover {color: #fff;border-color:#ff6600;}
 .product-title a h5 {
 	color: #1b1b1b;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 400;
 	text-transform: capitalize;
 	transition: all 0.3s ease 0s;
 	display: inline-block;
 }
 .product-title > p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
 }
 .product-title span {
@@ -982,7 +982,7 @@ ul.mega-menu > li {
 .tab-menu a {
     color: #777;
     font-family: roboto;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 500;
 }
 .tab-menu span {
@@ -1125,7 +1125,7 @@ ul.mega-menu > li {
     border-style: none none solid;
     border-width: 0 0 1px;
     color: #959595;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 300;
     height: 30px;
     margin-bottom: 30px;
@@ -1183,7 +1183,7 @@ ul.mega-menu > li {
     margin-bottom: 20px;
 }
 .footer-menu li a {
-    font-size: 14px;
+    font-size: 16px;
     text-transform: capitalize;
 }
 .footer-menu li a {
@@ -1360,7 +1360,7 @@ select {-moz-appearance: none;-webkit-appearance: none;}
 	color: #1b1b1b;
 	content: "";
 	font-family: fontawesome;
-	font-size: 15px;
+	font-size: 17px;
 	height: 100%;
 	line-height: 35px;
 	pointer-events: none;
@@ -1428,13 +1428,13 @@ select {-moz-appearance: none;-webkit-appearance: none;}
 .categ-tag li {
     color: #1b1b1b;
     float: none;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
 }
 .categ-tag li a {
 	color: #777;
 	font-family: roboto;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 100;
 	text-transform: capitalize;
 }
@@ -1480,7 +1480,7 @@ select {-moz-appearance: none;-webkit-appearance: none;}
 .pro-des-tab .tab-menu a ,.normal-tab .tab-menu a {
     color: #c2c2c2;
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 900;
     position: relative;
 }
@@ -1566,7 +1566,7 @@ select {-moz-appearance: none;-webkit-appearance: none;}
 .ratting i {
     color: #ff6600;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
     margin: 5px 0;
 }
 .ratting i.gray-star,.product-content .ratting i.gray-star {
@@ -1578,13 +1578,13 @@ select {-moz-appearance: none;-webkit-appearance: none;}
 /* related product title */
 .related-area .product-title a h5 {
 	color: #838383;
-	font-size: 14px;
+	font-size: 16px;
 	margin: 0;
 }
 .related-area .product-title span {
 	color: #616161;
 	margin-left: 0;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 700;
 }
 .related-area .product-title del {color: #afafaf;}
@@ -1928,7 +1928,7 @@ i.slick-arrow:hover {
 .shop-menu .custom-select {float: right;}
 .shop-menu .right p {
     float: right;
-    font-size: 12px;
+    font-size: 14px;
     margin-right: 10px;
     position: relative;
     top: 6px;
